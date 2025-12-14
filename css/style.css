@@ -1,0 +1,232 @@
+/* Global Variables & Reset */
+:root {
+    --bg-color: #100b20;
+    --text-color: #ffffff;
+    --text-muted: #a0a0ba;
+    --primary-gradient: linear-gradient(135deg, #7b2cbf, #f72585);
+    --secondary-gradient: linear-gradient(135deg, #4cc9f0, #4361ee);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-main: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.gradient-text {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Layout Compontents */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+header {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 100px 20px;
+}
+
+/* Abstract Background Glows */
+header::before, header::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--primary-gradient);
+    filter: blur(100px);
+    opacity: 0.2;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+header::before {
+    top: -50px;
+    left: -50px;
+}
+
+header::after {
+    bottom: 50px;
+    right: -50px;
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 30px rgba(123, 44, 191, 0.3);
+}
+
+.btn-primary {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(123, 44, 191, 0.5);
+}
+
+/* Features Section */
+.features {
+    padding: 100px 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.feature-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: var(--secondary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.feature-desc {
+    color: var(--text-muted);
+}
+
+/* Privacy Page Specifics */
+.privacy-page {
+    padding: 80px 0;
+}
+
+.privacy-content {
+    background: var(--glass-bg);
+    padding: 50px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.privacy-content h1 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.privacy-content h2 {
+    color: #4cc9f0; /* Cyan for headings */
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.privacy-content p, .privacy-content li {
+    color: #d1d1e0;
+    margin-bottom: 15px;
+}
+
+.highlight-box {
+    background: rgba(123, 44, 191, 0.1); /* Low opacity purple */
+    border-left: 4px solid #f72585;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Footer */
+footer {
+    padding: 50px 0;
+    text-align: center;
+    color: var(--text-muted);
+    border-top: 1px solid var(--glass-border);
+    margin-top: 50px;
+}
+
+footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .privacy-content {
+        padding: 25px;
+    }
+}
