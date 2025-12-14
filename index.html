@@ -27,7 +27,7 @@
             </h1>
             <p class="hero-subtitle">
                 Secure, high-quality real-time monitoring.
-                Works entirely on your local Wi-Fi.
+                Works entirely on your local Wi-Fi or Hotspot.
                 No internet required.
             </p>
             <a href="#" class="btn btn-primary">Download on Google Play</a>
@@ -61,13 +61,71 @@
                 <!-- Feature 3 -->
                 <div class="feature-card">
                     <span class="feature-icon">📶</span>
-                    <h3 class="feature-title">Local Connectivity</h3>
+                    <h3 class="feature-title">Anywhere Connectivity</h3>
                     <p class="feature-desc">
-                        Uses Wi-Fi Direct or local network discovery. Perfect for baby monitors, home security, or pet
-                        cams.
+                        Works on Wi-Fi or <strong>Mobile Hotspot</strong>. Perfect for travel or areas without internet.
                     </p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Technical Deep Dive -->
+    <section class="features" style="background: rgba(0,0,0,0.2);">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Under the Hood</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title" style="color: #4cc9f0;">Zero-Config Pairing</h3>
+                    <p class="feature-desc">
+                        Powered by Android's <strong>Network Service Discovery (NSD)</strong>. The app automatically
+                        finds devices on your network—no IP addresses to type, no QR codes to scan. Just open and
+                        connect.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title" style="color: #f72585;">Direct Socket Stream</h3>
+                    <p class="feature-desc">
+                        We use a custom-built <strong>UDP/TCP Socket Server</strong> directly on your device. This
+                        eliminates the "middleman" server found in other apps, ensuring data privacy and reducing lag.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title" style="color: #7b2cbf;">Background Service</h3>
+                    <p class="feature-desc">
+                        utilizing Android's <strong>Foreground Service</strong> architecture, the camera continues to
+                        stream securely even when your screen is off or the app is minimized, saving battery life.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Community Use Cases</h2>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="feature-card" style="border-color: rgba(255,255,255,0.05);">
+                    <h3 class="feature-title">👶 Baby Monitor</h3>
+                    <p class="feature-desc">Secure, offline monitoring for your nursery.</p>
+                </div>
+                <div class="feature-card" style="border-color: rgba(255,255,255,0.05);">
+                    <h3 class="feature-title">🚪 Front Door Cam</h3>
+                    <p class="feature-desc">See who is at the door without expensive subscriptions.</p>
+                </div>
+                <div class="feature-card" style="border-color: rgba(255,255,255,0.05);">
+                    <h3 class="feature-title">🐾 Pet Watcher</h3>
+                    <p class="feature-desc">Check on your pets while in another room.</p>
+                </div>
+                <div class="feature-card" style="border-color: rgba(255,255,255,0.05);">
+                    <h3 class="feature-title">🚗 Garage Security</h3>
+                    <p class="feature-desc">Monitor your garage or driveway using an old phone.</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; color: var(--text-muted);">
+                <em>Have a unique use case? Let us know in your review!</em>
+            </p>
         </div>
     </section>
 
