@@ -63,6 +63,19 @@ h3 {
     animation: waveFlow 12s ease-in-out infinite;
 }
 
+/* Wave Animation for Button Background */
+.btn-wave {
+    background: linear-gradient(135deg,
+            #7b2cbf,
+            #f72585,
+            #ffffff,
+            #7b2cbf);
+    background-size: 300% 300%;
+    animation: waveFlow 6s ease-in-out infinite;
+    color: white;
+    border: none;
+}
+
 @keyframes waveFlow {
     0% {
         background-position: 0% 0%;
