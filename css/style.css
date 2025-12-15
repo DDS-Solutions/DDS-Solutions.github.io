@@ -220,8 +220,7 @@ header::after {
     vertical-align: middle;
     margin-right: 10px;
     border-radius: 4px;
-    /* Invert if the image is black/white to match theme, otherwise remove filter */
-    filter: invert(1);
+    /* SVG is already white, no filter needed */
     opacity: 0.9;
 }
 
