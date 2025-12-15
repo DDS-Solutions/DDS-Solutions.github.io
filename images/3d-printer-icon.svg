@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Frame -->
+  <path d="M4 6V4h16v2" />
+  <path d="M4 6v14h16V6" />
+  
+  <!-- Print Bed -->
+  <path d="M6 14h12" />
+  
+  <!-- Nozzle/Head -->
+  <path d="M10 6v3h4V6" />
+  <path d="M12 9v2" />
+  
+  <!-- Printing Object (Cube) -->
+  <path d="M11 11.5 h2 v2.5 h-2 z" /> 
+
+  <!-- Base controls -->
+  <circle cx="12" cy="17" r="1" />
+</svg>
