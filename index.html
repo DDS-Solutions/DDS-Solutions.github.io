@@ -163,7 +163,8 @@
                     <p class="feature-desc">Monitor your garage or driveway using an old phone.</p>
                 </div>
                 <!-- New Use Cases -->
-                <div class="feature-card" style="border-color: rgba(255,255,255,0.05);">
+                <div class="feature-card clickable-card" onclick="openModal()"
+                    style="border-color: rgba(255,255,255,0.05); cursor: pointer;">
                     <h3 class="feature-title">
                         <img src="images/3d-printer-icon.svg" alt="3D Print" class="use-case-icon">
                         3D Print Monitoring
@@ -197,6 +198,122 @@
             <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">User Agreement</a>
         </div>
     </footer>
+
+    <!-- Modal for 3D Print Monitoring -->
+    <div id="featureModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <img src="https://via.placeholder.com/60" alt="Logo" class="modal-logo" style="display:none;">
+                <!-- Placeholder for actual logo if needed -->
+                <div class="modal-header-text">
+                    <h1 class="modal-main-title">Remote Camera System</h1>
+                    <p class="modal-subtitle">Turn any Android device into a secure security camera.</p>
+                </div>
+            </div>
+
+            <!-- Visual Workflow Area -->
+            <div class="workflow-container">
+                <div class="workflow-device" id="device-a">
+                    <div class="device-label">Device A: Camera Mode</div>
+                    <div class="device-tagline">Place your old phone where you need to see.</div>
+                    <div class="device-frame">
+                        <div class="camera-preview-label">Camera Preview</div>
+                        <img src="images/3d-printer-icon.svg"
+                            style="width: 50%; opacity: 0.2; position: absolute; top: 25%; left: 25%;" alt="">
+                        <!-- Placeholder for visual representation of printer -->
+                    </div>
+                </div>
+
+                <div class="workflow-connector">
+                    <div class="wifi-icon">📶</div>
+                    <div class="connector-text">
+                        <strong>Secure Local Network</strong><br>
+                        <small>Direct connection. No internet required.</small>
+                    </div>
+                </div>
+
+                <div class="workflow-device" id="device-b">
+                    <div class="device-label">Device B: Monitor Mode</div>
+                    <div class="device-tagline">Watch live from anywhere in your home.</div>
+                    <div class="device-frame">
+                        <img src="images/3d-printer-icon.svg"
+                            style="width: 50%; opacity: 0.2; position: absolute; top: 25%; left: 25%;" alt="">
+                        <div class="monitor-controls">
+                            <span class="control-dot"></span>
+                            <span class="control-dot red"></span>
+                            <span class="control-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Icons Grid -->
+            <div class="modal-features-grid">
+                <div class="m-feature">
+                    <span class="m-feature-icon">🔍</span>
+                    <div>
+                        <strong>Remote Zoom</strong><br>
+                        <small>Pinch-to-zoom or use the slider for a closer look.</small>
+                    </div>
+                </div>
+                <div class="m-feature">
+                    <span class="m-feature-icon">📹</span>
+                    <div>
+                        <strong>Video Recording</strong><br>
+                        <small>Record important moments directly to the camera device.</small>
+                    </div>
+                </div>
+                <div class="m-feature">
+                    <span class="m-feature-icon">📷</span>
+                    <div>
+                        <strong>Photo Capture</strong><br>
+                        <small>Snap high-quality photos remotely.</small>
+                    </div>
+                </div>
+                <div class="m-feature">
+                    <span class="m-feature-icon">🌐</span>
+                    <div>
+                        <strong>Browser Access</strong><br>
+                        <small>View the feed from any laptop or PC on the network.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <h2 class="footer-slogan">Monitor What Matters.</h2>
+                <p class="footer-tags">Simple, Private, and Free.</p>
+                <div class="steps-guide">
+                    <strong>Step 1:</strong> Select 'Camera Mode' on your first device.
+                    <strong>Step 2:</strong> Select 'Monitor Mode' on your second device.
+                    <strong>Step 3:</strong> Connect and view live HD video instantly.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('featureModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeModal() {
+            document.getElementById('featureModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scroll
+        }
+
+        // Close on outside click
+        window.onclick = function (event) {
+            const modal = document.getElementById('featureModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 
 </body>
 
