@@ -34,7 +34,10 @@
                 No internet required.
             </p>
             <a href="#" class="btn btn-primary btn-wave">Download on Google Play</a>
-            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.6;">(Coming Soon)</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.6; margin-bottom: 10px;">(Coming Soon)</p>
+            <a href="javascript:void(0)" onclick="openEcosystemModal()" class="feature-guide-link">
+                Feature Guide: App Cloning & Multi-Device Support
+            </a>
         </div>
     </header>
 
@@ -295,6 +298,61 @@
         </div>
     </div>
 
+    <!-- Modal for Multi-Device Ecosystem -->
+    <div id="ecosystemModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEcosystemModal()">&times;</span>
+            <div class="modal-header">
+                <h1 class="modal-main-title">Multi-Device Ecosystem</h1>
+                <p class="modal-subtitle">Flexible monitoring solutions for every screen.</p>
+            </div>
+
+            <div class="modal-features-grid" style="grid-template-columns: 1fr; gap: 30px;">
+                <!-- Share App Section -->
+                <div class="m-feature"
+                    style="background: rgba(123, 44, 191, 0.05); padding: 20px; border-radius: 15px; border: 1px dashed rgba(123, 44, 191, 0.3);">
+                    <span class="m-feature-icon" style="font-size: 2.5rem;">📱</span>
+                    <div>
+                        <h3 style="margin-bottom: 10px; color: #7b2cbf;">Share Application (Clones)</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">
+                            Transform as many devices as you need. Use the <strong>"Share Application"</strong> feature
+                            within the app to generate a local download link.
+                        </p>
+                        <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                            <li><strong>Unlimited Clones:</strong> Install the full application on other Android 13+
+                                phones.</li>
+                            <li><strong>Full Control:</strong> Every cloned app can act as a Camera or a Monitor.</li>
+                            <li><strong>100% Free:</strong> No extra costs for additional devices.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Web Browser Section -->
+                <div class="m-feature"
+                    style="background: rgba(76, 201, 240, 0.05); padding: 20px; border-radius: 15px; border: 1px dashed rgba(76, 201, 240, 0.3);">
+                    <span class="m-feature-icon" style="font-size: 2.5rem;">🌐</span>
+                    <div>
+                        <h3 style="margin-bottom: 10px; color: #4cc9f0;">View on Web Browser</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px;">
+                            Quick access without the wait. Perfect for laptops, tablets, or phones where you don't want
+                            to install an app.
+                        </p>
+                        <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                            <li><strong>Zero Install:</strong> Just open the browser and type the local address.</li>
+                            <li><strong>Universal Access:</strong> Works on any device connected to your network.</li>
+                            <li><strong>Real-Time Feed:</strong> Watch your camera stream instantly in HD.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <p style="font-size: 0.9rem; color: #f72585; font-weight: bold;">Note: All features require devices to
+                    be on the same local Wi-Fi or Hotspot network.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         function openModal() {
             document.getElementById('featureModal').style.display = 'flex';
@@ -306,11 +364,25 @@
             document.body.style.overflow = 'auto'; // Restore scroll
         }
 
+        function openEcosystemModal() {
+            document.getElementById('ecosystemModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEcosystemModal() {
+            document.getElementById('ecosystemModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
         // Close on outside click
         window.onclick = function (event) {
-            const modal = document.getElementById('featureModal');
-            if (event.target == modal) {
+            const featureModal = document.getElementById('featureModal');
+            const ecosystemModal = document.getElementById('ecosystemModal');
+            if (event.target == featureModal) {
                 closeModal();
+            }
+            if (event.target == ecosystemModal) {
+                closeEcosystemModal();
             }
         }
     </script>
