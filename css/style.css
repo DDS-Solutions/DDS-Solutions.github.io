@@ -149,6 +149,12 @@ header::after {
     margin-bottom: 40px;
 }
 
+.hero-slogan {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
