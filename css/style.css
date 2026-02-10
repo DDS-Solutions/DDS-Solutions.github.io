@@ -39,7 +39,8 @@ h1,
 h2,
 h3 {
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
 .gradient-text {
@@ -87,6 +88,82 @@ h3 {
 
     100% {
         background-position: 0% 0%;
+    }
+}
+
+/* ===========================
+   Scroll Reveal Animations
+   =========================== */
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Elements waiting to be revealed */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Revealed state */
+.reveal.revealed {
+    animation: revealUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Staggered children */
+.reveal-stagger>*:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.reveal-stagger>*:nth-child(2) {
+    animation-delay: 100ms;
+}
+
+.reveal-stagger>*:nth-child(3) {
+    animation-delay: 200ms;
+}
+
+.reveal-stagger>*:nth-child(4) {
+    animation-delay: 300ms;
+}
+
+.reveal-stagger>*:nth-child(5) {
+    animation-delay: 400ms;
+}
+
+.reveal-stagger>*:nth-child(6) {
+    animation-delay: 500ms;
+}
+
+.reveal-stagger>*:nth-child(7) {
+    animation-delay: 600ms;
+}
+
+.reveal-stagger>*:nth-child(8) {
+    animation-delay: 700ms;
+}
+
+/* Accessibility: Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .reveal.revealed {
+        animation: none;
+    }
+
+    .btn-wave,
+    .color-wave {
+        animation: none;
     }
 }
 
@@ -138,27 +215,37 @@ header::after {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
     margin-bottom: 20px;
-    letter-spacing: -1px;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     color: var(--text-muted);
     margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-slogan {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
     margin-bottom: 25px;
     font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.hero-secondary-link {
+    margin-top: 20px;
+    font-size: 0.95rem;
 }
 
 .feature-guide-link {
     display: inline-block;
     color: #4cc9f0;
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -208,12 +295,16 @@ header::after {
     padding: 40px;
     border-radius: 20px;
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-color 0.3s ease,
+        box-shadow 0.4s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-8px);
+    border-color: rgba(76, 201, 240, 0.4);
+    box-shadow: 0 20px 40px rgba(76, 201, 240, 0.15),
+        0 0 30px rgba(123, 44, 191, 0.1);
 }
 
 .feature-icon {
@@ -227,8 +318,9 @@ header::after {
 }
 
 .feature-title {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
     margin-bottom: 15px;
+    letter-spacing: -0.01em;
 }
 
 .feature-desc {
@@ -549,5 +641,208 @@ footer a:hover {
         font-size: 1rem;
         line-height: 1.5;
         text-align: left;
+    }
+}
+
+/* ===========================
+   Screenshot Carousel Styles
+   =========================== */
+.screenshot-carousel {
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.screenshot-carousel h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.screenshot-carousel .section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* Carousel Container */
+.carousel-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+    padding: 20px 60px;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
+}
+
+/* Individual Slide */
+.carousel-slide {
+    flex: 0 0 280px;
+    scroll-snap-align: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.carousel-slide:hover {
+    transform: translateY(-5px);
+    border-color: rgba(76, 201, 240, 0.4);
+}
+
+.carousel-slide img {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    background: #1a1530;
+}
+
+.carousel-slide .slide-caption {
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.carousel-slide .slide-caption h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.carousel-slide .slide-caption p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Navigation Arrows */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(16, 11, 32, 0.9);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    color: #4cc9f0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-nav:hover {
+    background: rgba(76, 201, 240, 0.15);
+    border-color: #4cc9f0;
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.3);
+}
+
+.carousel-nav.prev {
+    left: 10px;
+}
+
+.carousel-nav.next {
+    right: 10px;
+}
+
+/* Dot Indicators */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--glass-border);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot:hover,
+.carousel-dot.active {
+    background: #4cc9f0;
+    box-shadow: 0 0 8px rgba(76, 201, 240, 0.6);
+}
+
+/* Responsive: Mobile */
+@media (max-width: 768px) {
+    .carousel-slide {
+        flex: 0 0 240px;
+    }
+
+    .carousel-track {
+        padding: 20px 30px;
+    }
+
+    .carousel-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .carousel-nav.prev {
+        left: 5px;
+    }
+
+    .carousel-nav.next {
+        right: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-slide {
+        flex: 0 0 200px;
+    }
+
+    .carousel-nav {
+        display: none;
+        /* Hide arrows on small screens, rely on swipe */
+    }
+
+    .carousel-track {
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .screenshot-carousel {
+        padding: 50px 0;
+    }
+}
+/* Landscape Slide Support */
+.carousel-slide.landscape {
+    flex: 0 0 600px;
+    align-self: center;
+}
+
+.carousel-slide.landscape img {
+    aspect-ratio: 16/9;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .carousel-slide.landscape {
+        flex: 0 0 85vw;
     }
 }

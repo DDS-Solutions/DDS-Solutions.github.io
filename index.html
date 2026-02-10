@@ -29,60 +29,169 @@
                 Monitor What Matters To You
             </div>
             <p class="hero-subtitle">
-                Secure, high-quality real-time monitoring.
-                Works entirely on your local Wi-Fi or Hotspot.
-                No internet required.
+                100% private, real-time monitoring on your local Wi-Fi. No internet. No cloud.
             </p>
             <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
                 class="btn btn-primary btn-wave" target="_blank">Download on Google Play</a>
-            <a href="javascript:void(0)" onclick="openEcosystemModal()" class="feature-guide-link">
-                Feature Guide: App Cloning & Multi-Device Support
-            </a>
+            <p class="hero-secondary-link">
+                <a href="javascript:void(0)" onclick="openEcosystemModal()" class="feature-guide-link">
+                    Learn about multi-device support →
+                </a>
+            </p>
         </div>
     </header>
 
-    <!-- Important Information / Specs -->
-    <section style="padding: 50px 0; border-bottom: 1px solid var(--glass-border);">
+    <!-- App Screenshots Carousel -->
+    <section class="screenshot-carousel">
         <div class="container">
-            <div class="features-grid"
-                style="margin-top: 0; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <h2 class="reveal">See the App in Action</h2>
+            <p class="section-subtitle reveal">Swipe through screenshots to explore the features</p>
 
-                <!-- Card 1: Technical Expectations -->
-                <div class="feature-card" style="background: rgba(16, 11, 32, 0.6);">
-                    <h3 class="feature-title" style="color: #f72585; font-size: 1.25rem;">Technical Expectations</h3>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted);">
-                        <li style="margin-bottom: 5px;">Minimum <strong>Android 12 OS</strong> required.</li>
-                        <li><strong>USB Power</strong> recommended for sustained periods of use.</li>
-                    </ul>
+            <div class="carousel-wrapper">
+                <button class="carousel-nav prev" aria-label="Previous slide">&#10094;</button>
+
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Slide: App Start Up Screen -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/app-startup.png" alt="App Start Up Screen">
+                        <div class="slide-caption">
+                            <h4>App Start Up Screen</h4>
+                            <p>Initialize your remote camera experience</p>
+                        </div>
+                    </div>
+                    <!-- Slide: Home Screen -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/home-screen.png" alt="Home Screen">
+                        <div class="slide-caption">
+                            <h4>Home Screen</h4>
+                            <p>Choose Camera or Monitor mode</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: App Menu -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/app-menu.png" alt="App Menu">
+                        <div class="slide-caption">
+                            <h4>App Menu</h4>
+                            <p>Easy navigation to all features</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Camera Mode -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/camera-mode.png" alt="Camera Mode">
+                        <div class="slide-caption">
+                            <h4>Camera Mode</h4>
+                            <p>Stream live video from your device</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Monitor Screen -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/monitor-screen.png" alt="Monitor Screen">
+                        <div class="slide-caption">
+                            <h4>Monitor Screen</h4>
+                            <p>Watch live feeds in HD</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Motion Detection -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/motion-detection.png" alt="Motion Detection">
+                        <div class="slide-caption">
+                            <h4>Motion Detection</h4>
+                            <p>Get alerted when movement is detected</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Camera Selection -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/camera-selection.png" alt="Camera Selection">
+                        <div class="slide-caption">
+                            <h4>Camera Selection</h4>
+                            <p>Select a camera to monitor</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Settings -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/app-settings.png" alt="App Settings">
+                        <div class="slide-caption">
+                            <h4>Settings</h4>
+                            <p>Customize your experience</p>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Slide: Instructions -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/instructions-screen.png" alt="Instructions Screen">
+                        <div class="slide-caption">
+                            <h4>Instructions</h4>
+                            <p>How to use the app</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Feature Definitions -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/feature-definitions.png" alt="Feature Definitions Screen">
+                        <div class="slide-caption">
+                            <h4>Feature Definitions</h4>
+                            <p>Understand the app symbols</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Privacy Policy -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/privacy-policy.png" alt="Privacy Policy Screen">
+                        <div class="slide-caption">
+                            <h4>Privacy Policy</h4>
+                            <p>Your data stays local</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: About -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/about-screen.png" alt="About Screen">
+                        <div class="slide-caption">
+                            <h4>About</h4>
+                            <p>App info and support options</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Website Screen -->
+                    <div class="carousel-slide">
+                        <img src="images/screenshots/website-screen.png" alt="Website Screen">
+                        <div class="slide-caption">
+                            <h4>Website Screen</h4>
+                            <p>Access via web browser</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide: PC Browser Screen -->
+                    <div class="carousel-slide landscape">
+                        <img src="images/screenshots/pc-browser.png" alt="PC Browser Screen">
+                        <div class="slide-caption">
+                            <h4>PC Browser Screen</h4>
+                            <p>View on your desktop</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Card 2: Use Considerations -->
-                <div class="feature-card" style="background: rgba(16, 11, 32, 0.6);">
-                    <h3 class="feature-title" style="color: #4cc9f0; font-size: 1.25rem;">Use Considerations</h3>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted);">
-                        <li style="margin-bottom: 5px;">Performance depends on the number of connected devices/browsers.
-                        </li>
-                        <li>Wi-Fi/Hotspot bandwidth limitations may affect stream quality.</li>
-                    </ul>
-                </div>
-
-                <!-- Card 3: Free 3D Files -->
-                <div class="feature-card"
-                    style="background: rgba(16, 11, 32, 0.6); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                    <h3 class="feature-title" style="color: #7b2cbf; font-size: 1.25rem;">3D Printed <br>Mounting
-                        Accessories</h3>
-                    <p class="feature-desc" style="font-weight: bold; margin-top: 10px;">(Coming Soon)</p>
-                </div>
-
+                <button class="carousel-nav next" aria-label="Next slide">&#10095;</button>
             </div>
+
+            <!-- Dot Indicators -->
+            <div class="carousel-dots" id="carouselDots"></div>
         </div>
     </section>
 
     <!-- Features Section -->
     <section class="features">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 20px;">Why Choose Us?</h2>
-            <div class="features-grid">
+            <h2 class="reveal" style="text-align: center; margin-bottom: 20px;">Why Choose Us?</h2>
+            <div class="features-grid reveal reveal-stagger">
                 <!-- Feature 1 -->
                 <div class="feature-card">
                     <span class="feature-icon">🔒</span>
@@ -116,8 +225,8 @@
     <!-- Technical Deep Dive -->
     <section class="features" style="background: rgba(0,0,0,0.2);">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px;">Under the Hood</h2>
-            <div class="features-grid">
+            <h2 class="reveal" style="text-align: center; margin-bottom: 40px;">Under the Hood</h2>
+            <div class="features-grid reveal reveal-stagger">
                 <div class="feature-card">
                     <h3 class="feature-title" style="color: #4cc9f0;">Zero-Config Pairing</h3>
                     <p class="feature-desc">
@@ -145,10 +254,12 @@
     </section>
 
     <!-- Use Cases -->
+
     <section class="features">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px;">Community Use Cases</h2>
-            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <h2 class="reveal" style="text-align: center; margin-bottom: 40px;">Community Use Cases</h2>
+            <div class="features-grid reveal reveal-stagger"
+                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                 <div class="feature-card" style="border-color: rgba(255,255,255,0.05);">
                     <h3 class="feature-title">👶 Baby Monitoring</h3>
                     <p class="feature-desc">Secure, offline monitoring for your nursery.</p>
@@ -190,6 +301,43 @@
             <p style="text-align: center; margin-top: 30px; color: var(--text-muted);">
                 <em>Have a unique use case? Let us know in your review!</em>
             </p>
+        </div>
+    </section>
+
+    <!-- Important Information / Specs -->
+    <section style="padding: 50px 0; border-bottom: 1px solid var(--glass-border);">
+        <div class="container">
+            <div class="features-grid"
+                style="margin-top: 0; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+                <!-- Card 1: Technical Expectations -->
+                <div class="feature-card" style="background: rgba(16, 11, 32, 0.6);">
+                    <h3 class="feature-title" style="color: #f72585; font-size: 1.25rem;">Technical Expectations</h3>
+                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted);">
+                        <li style="margin-bottom: 5px;">Minimum <strong>Android 12 OS</strong> required.</li>
+                        <li><strong>USB Power</strong> recommended for sustained periods of use.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Use Considerations -->
+                <div class="feature-card" style="background: rgba(16, 11, 32, 0.6);">
+                    <h3 class="feature-title" style="color: #4cc9f0; font-size: 1.25rem;">Use Considerations</h3>
+                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted);">
+                        <li style="margin-bottom: 5px;">Performance depends on the number of connected devices/browsers.
+                        </li>
+                        <li>Wi-Fi/Hotspot bandwidth limitations may affect stream quality.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Free 3D Files -->
+                <div class="feature-card"
+                    style="background: rgba(16, 11, 32, 0.6); text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                    <h3 class="feature-title" style="color: #7b2cbf; font-size: 1.25rem;">3D Printed <br>Mounting
+                        Accessories</h3>
+                    <p class="feature-desc" style="font-weight: bold; margin-top: 10px;">(Coming Soon)</p>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -393,6 +541,107 @@
                 closeEcosystemModal();
             }
         }
+
+        // Screenshot Carousel
+        document.addEventListener('DOMContentLoaded', function () {
+            const track = document.getElementById('carouselTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+            const slides = track ? track.querySelectorAll('.carousel-slide') : [];
+            const prevBtn = document.querySelector('.carousel-nav.prev');
+            const nextBtn = document.querySelector('.carousel-nav.next');
+
+            if (!track || slides.length === 0) return;
+
+            // Create dot indicators
+            slides.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                dot.addEventListener('click', () => scrollToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+            // Scroll to specific slide
+            function scrollToSlide(index) {
+                const slide = slides[index];
+                if (slide) {
+                    const trackRect = track.getBoundingClientRect();
+                    const slideRect = slide.getBoundingClientRect();
+                    const scrollPos = track.scrollLeft + slideRect.left - trackRect.left - (trackRect.width - slideRect.width) / 2;
+                    track.scrollTo({ left: scrollPos, behavior: 'smooth' });
+                }
+            }
+
+            // Update active dot on scroll
+            function updateActiveDot() {
+                const trackCenter = track.scrollLeft + track.clientWidth / 2;
+                let closestIndex = 0;
+                let closestDistance = Infinity;
+
+                slides.forEach((slide, index) => {
+                    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+                    const distance = Math.abs(trackCenter - slideCenter);
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestIndex = index;
+                    }
+                });
+
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === closestIndex);
+                });
+            }
+
+            track.addEventListener('scroll', updateActiveDot);
+
+            // Arrow navigation
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: -300, behavior: 'smooth' });
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: 300, behavior: 'smooth' });
+                });
+            }
+        });
+
+        // Scroll Reveal Animation (IntersectionObserver)
+        document.addEventListener('DOMContentLoaded', function () {
+            const revealElements = document.querySelectorAll('.reveal');
+
+            if (revealElements.length === 0) return;
+
+            // Check if user prefers reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (prefersReducedMotion) {
+                // Show all elements immediately without animation
+                revealElements.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                });
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        });
     </script>
 
 </body>
