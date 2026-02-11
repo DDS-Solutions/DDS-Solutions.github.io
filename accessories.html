@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessories | Pro Wifi Remote Camera</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Accessories Specific Styles */
+        .affiliate-disclosure {
+            background: rgba(123, 44, 191, 0.15);
+            border: 1px solid rgba(123, 44, 191, 0.3);
+            padding: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+        }
+
+        .tier-badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .tier-good {
+            background: rgba(76, 201, 240, 0.2);
+            color: #4cc9f0;
+            border: 1px solid rgba(76, 201, 240, 0.4);
+        }
+
+        .tier-better {
+            background: rgba(67, 97, 238, 0.2);
+            color: #4361ee;
+            border: 1px solid rgba(67, 97, 238, 0.4);
+        }
+
+        .tier-best {
+            background: rgba(247, 37, 133, 0.2);
+            color: #f72585;
+            border: 1px solid rgba(247, 37, 133, 0.4);
+            box-shadow: 0 0 10px rgba(247, 37, 133, 0.2);
+        }
+
+        .product-image-container {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .use-case-title {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .product-context {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-style: italic;
+            border-left: 2px solid var(--glass-border);
+            padding-left: 10px;
+        }
+
+        .product-specs {
+            margin: 15px 0;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
+        .product-specs li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-specs li::before {
+            content: '•';
+            color: #4cc9f0;
+            margin-right: 8px;
+        }
+
+        .safety-section {
+            background: rgba(16, 11, 32, 0.8);
+            border-top: 1px solid var(--glass-border);
+            padding: 60px 0;
+            margin-top: 20px;
+        }
+
+        .safety-box {
+            border-left: 4px solid #f72585;
+            background: rgba(247, 37, 133, 0.05);
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Affiliate Disclosure Banner -->
+    <div class="container" style="margin-top: 20px;">
+        <div class="affiliate-disclosure">
+            <strong>Disclosure:</strong> As an Amazon Associate, we earn from qualifying purchases. This helps support
+            the development of the app and keeping it ad-free.
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header style="min-height: 40vh; padding: 60px 20px;">
+        <div class="container hero-content">
+            <h1 class="hero-title" style="font-size: 3rem;">
+                <span class="color-wave">Equip Your Setup</span>
+            </h1>
+            <p class="hero-subtitle">
+                Curated accessories for reliable, long-term monitoring. <br>
+                Choose the tier that fits your improved security needs.
+            </p>
+        </div>
+    </header>
+
+    <!-- USB Cables Section -->
+    <section class="features" style="padding-top: 20px;">
+        <div class="container">
+            <h2 class="reveal gradient-text" style="font-size: 2rem; margin-bottom: 30px;">Power Cables</h2>
+            <p class="section-subtitle reveal" style="margin-bottom: 40px; max-width: 700px;">
+                Using the right cable is critical for long-distance power runs. Standard cables lose voltage over
+                distance, causing camera drops.
+            </p>
+
+            <div class="features-grid reveal reveal-stagger">
+
+                <!-- Good Tier -->
+                <div class="feature-card product-card">
+                    <span class="tier-badge tier-good">Good Value</span>
+                    <div class="product-image-container">
+                        <img src="https://m.media-amazon.com/images/I/41u6d4VB9WL._AC_SL1500_.jpg" alt="Basic USB Cable"
+                            class="product-image">
+                    </div>
+                    <h3 class="use-case-title">The Starter</h3>
+                    <p class="product-context">Best for: Testing the app, short-term use, or near-outlet placement.</p>
+
+                    <h4 style="color: #4cc9f0; margin-bottom: 10px;">Basic 6ft Cable</h4>
+                    <p class="feature-desc">Standard length braided cable. Reliable for everyday charging and
+                        monitoring.</p>
+
+                    <ul class="product-specs">
+                        <li>Length: 6ft (1.8m)</li>
+                        <li>Standard Gauge</li>
+                        <li>Durable Braiding</li>
+                    </ul>
+
+                    <a href="https://amzn.to/4ri6Z7W" target="_blank" class="btn btn-primary"
+                        style="text-align: center;">View on
+                        Amazon</a>
+                </div>
+
+                <!-- Better Tier -->
+                <div class="feature-card product-card">
+                    <span class="tier-badge tier-better">Better Choice</span>
+                    <div class="product-image-container">
+                        <img src="https://m.media-amazon.com/images/I/41sfQaZpYnL._AC_SL1500_.jpg" alt="Long USB Cable"
+                            class="product-image">
+                    </div>
+                    <h3 class="use-case-title">The Flexible Setup</h3>
+                    <p class="product-context">Best for: Positioning cameras on shelves or corners away from outlets.
+                    </p>
+
+                    <h4 style="color: #4361ee; margin-bottom: 10px;">10ft High-Speed Cable</h4>
+                    <p class="feature-desc">Enhanced length with thicker power wires to prevent charging issues.</p>
+
+                    <ul class="product-specs">
+                        <li>Length: 10ft (3m)</li>
+                        <li>22 AWG Power Lines</li>
+                        <li>Reinforced Connectors</li>
+                    </ul>
+
+                    <a href="https://amzn.to/4067FRK" target="_blank" class="btn btn-primary"
+                        style="text-align: center;">View on Amazon</a>
+                </div>
+
+                <!-- Best Tier -->
+                <div class="feature-card product-card" style="border-color: rgba(247, 37, 133, 0.5);">
+                    <span class="tier-badge tier-best">Pro Recommended</span>
+                    <div class="product-image-container">
+                        <img src="https://m.media-amazon.com/images/I/516ylWNw6QS._AC_SL1500_.jpg" alt="Pro USB Cable"
+                            class="product-image">
+                    </div>
+                    <h3 class="use-case-title">The 24/7 Monitor</h3>
+                    <p class="product-context">Best for: Permanent installations, garage security, or outdoor
+                        enclosures.</p>
+
+                    <h4 style="color: #f72585; margin-bottom: 10px;">15ft+ Active Cable</h4>
+                    <p class="feature-desc">Premium shielding and gauge. Ensures stable power delivery over long runs.
+                    </p>
+
+                    <ul class="product-specs">
+                        <li>Length: 15ft+ (4.5m+)</li>
+                        <li>20 AWG Heavy Duty</li>
+                        <li>Voltage Drop Protection</li>
+                    </ul>
+
+                    <a href="https://amzn.to/4atqZNC" target="_blank" class="btn btn-primary btn-wave"
+                        style="text-align: center;">View on
+                        Amazon</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- AC Adapters Section -->
+    <section class="features" style="background: rgba(0,0,0,0.2);">
+        <div class="container">
+            <h2 class="reveal gradient-text" style="font-size: 2rem; margin-bottom: 30px;">AC Power Adapters</h2>
+            <p class="section-subtitle reveal" style="margin-bottom: 40px; max-width: 700px;">
+                Old chargers can overheat or undervolt your device. For continuous monitoring, stable power is key.
+            </p>
+
+            <div class="features-grid reveal reveal-stagger">
+
+                <!-- Good Tier -->
+                <div class="feature-card product-card">
+                    <span class="tier-badge tier-good">Standard</span>
+                    <div class="product-image-container">
+                        <img src="https://m.media-amazon.com/images/I/41DaQ2bX9KL._AC_SL1500_.jpg"
+                            alt="Standard Charger" class="product-image">
+                    </div>
+                    <h3 class="use-case-title">Single Device</h3>
+                    <p class="product-context">Best for: Powering a single camera phone.</p>
+
+                    <h4 style="color: #4cc9f0; margin-bottom: 10px;">5V/2A Compact Block</h4>
+                    <p class="feature-desc">Reliable output for most Android phones.</p>
+
+                    <a href="https://amzn.to/4r6hB9O" target="_blank" class="btn btn-primary"
+                        style="text-align: center; margin-top: auto;">View
+                        on Amazon</a>
+                </div>
+
+                <!-- Better Tier -->
+                <div class="feature-card product-card">
+                    <span class="tier-badge tier-better">Smart Power</span>
+                    <div class="product-image-container">
+                        <img src="https://m.media-amazon.com/images/I/31Xjoi-+c+L._AC_SL1500_.jpg" alt="Dual Charger"
+                            class="product-image">
+                    </div>
+                    <h3 class="use-case-title">Multi-Camera</h3>
+                    <p class="product-context">Best for: Powering two devices from one outlet.</p>
+
+                    <h4 style="color: #4361ee; margin-bottom: 10px;">Dual Port Fast Charger</h4>
+                    <p class="feature-desc">Smart IC technology distributes power safely.</p>
+
+                    <a href="https://amzn.to/4kws0ZR" target="_blank" class="btn btn-primary"
+                        style="text-align: center; margin-top: auto;">View on Amazon</a>
+                </div>
+
+                <!-- Best Tier -->
+                <div class="feature-card product-card">
+                    <span class="tier-badge tier-best">Ultimate Safety</span>
+                    <div class="product-image-container">
+                        <img src="https://m.media-amazon.com/images/I/21zu8Bnj4kL._AC_SL1500_.jpg" alt="GaN Charger"
+                            class="product-image">
+                    </div>
+                    <h3 class="use-case-title">The Cool Runner</h3>
+                    <p class="product-context">Best for: Devices running 24/7 in warm environments.</p>
+
+                    <h4 style="color: #f72585; margin-bottom: 10px;">Anker GaN Charger</h4>
+                    <p class="feature-desc">Gallium Nitride tech runs cooler and safer tailored for continuous load.</p>
+
+                    <a href="https://amzn.to/3ZwbU93" target="_blank" class="btn btn-primary btn-wave"
+                        style="text-align: center; margin-top: auto;">View on Amazon</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety & Caution Section -->
+    <section class="safety-section">
+        <div class="container">
+            <h2 class="reveal" style="text-align: center; margin-bottom: 40px; color: #f72585;">⚠️ Critical Safety
+                Notices</h2>
+
+            <div class="features-grid reveal reveal-stagger" style="grid-template-columns: 1fr 1fr;">
+                <div class="safety-box">
+                    <h3>🔋 Battery Health</h3>
+                    <p style="color: #d1d1e0; margin-top: 10px;">
+                        Continuous charging can generate heat. For 24/7 use:
+                    </p>
+                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); margin-top: 10px;">
+                        <li>Remove the phone case to improve heat dissipation.</li>
+                        <li>Reduce screen brightness to the minimum.</li>
+                        <li>Consider apps or settings that limit maximum charge to 80%.</li>
+                    </ul>
+                </div>
+
+                <div class="safety-box" style="border-left-color: #4cc9f0; background: rgba(76, 201, 240, 0.05);">
+                    <h3>⚡ Cable & Adapter Safety</h3>
+                    <p style="color: #d1d1e0; margin-top: 10px;">
+                        Not all cables are rated for continuous current.
+                    </p>
+                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); margin-top: 10px;">
+                        <li>Discard any cable with fraying or exposed wires immediately.</li>
+                        <li>If an adapter feels hot to the touch, replace it with a higher-amperage rated unit (like the
+                            GaN options above).</li>
+                        <li>Avoid daisy-chaining extension cords.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="index.html" class="btn btn-primary"
+                    style="background: transparent; border: 1px solid var(--text-muted);">← Return to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DDS Solutions. All rights reserved.</p>
+            <br>
+            <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">User Agreement</a>
+        </div>
+    </footer>
+
+    <!-- Scroll & Reveal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const revealElements = document.querySelectorAll('.reveal');
+
+            if (revealElements.length === 0) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
