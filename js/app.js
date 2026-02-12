@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize Medium Zoom
     // Check if mediumZoom is loaded
     if (typeof mediumZoom === 'function') {
-        mediumZoom('.carousel-slide img', {
+        mediumZoom('.carousel-slide img:not(.no-zoom)', {
             margin: 0,
             background: '#100b20',
             scrollOffset: 0,
