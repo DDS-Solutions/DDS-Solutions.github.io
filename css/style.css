@@ -314,14 +314,106 @@ a.feature-card {
         0 0 30px rgba(123, 44, 191, 0.1);
 }
 
-.feature-icon {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    display: inline-block;
-    background: var(--secondary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* Neon Glass Icons */
+.icon-glass {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-glass svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 1.5px;
+    transition: all 0.4s ease;
+}
+
+/* Icon Variants */
+.icon-lock,
+.icon-cyan {
+    color: #4cc9f0;
+    /* Cyan */
+    box-shadow: 0 0 0 rgba(76, 201, 240, 0);
+}
+
+.icon-zap,
+.icon-pink {
+    color: #f72585;
+    /* Pink */
+    box-shadow: 0 0 0 rgba(247, 37, 133, 0);
+}
+
+.icon-wifi,
+.icon-purple {
+    color: #7b2cbf;
+    /* Purple */
+    box-shadow: 0 0 0 rgba(123, 44, 191, 0);
+}
+
+/* Hover Effects */
+.feature-card:hover .icon-glass {
+    transform: translateY(-5px) scale(1.05);
+}
+
+.feature-card:hover .icon-lock,
+.feature-card:hover .icon-cyan {
+    background: rgba(76, 201, 240, 0.1);
+    border-color: rgba(76, 201, 240, 0.3);
+    box-shadow: 0 0 20px rgba(76, 201, 240, 0.2), inset 0 0 10px rgba(76, 201, 240, 0.1);
+    color: #fff;
+    text-shadow: 0 0 10px #4cc9f0;
+}
+
+.feature-card:hover .icon-zap,
+.feature-card:hover .icon-pink {
+    background: rgba(247, 37, 133, 0.1);
+    border-color: rgba(247, 37, 133, 0.3);
+    box-shadow: 0 0 20px rgba(247, 37, 133, 0.2), inset 0 0 10px rgba(247, 37, 133, 0.1);
+    color: #fff;
+    text-shadow: 0 0 10px #f72585;
+}
+
+.feature-card:hover .icon-wifi,
+.feature-card:hover .icon-purple {
+    background: rgba(123, 44, 191, 0.1);
+    border-color: rgba(123, 44, 191, 0.3);
+    box-shadow: 0 0 20px rgba(123, 44, 191, 0.2), inset 0 0 10px rgba(123, 44, 191, 0.1);
+    color: #fff;
+    text-shadow: 0 0 10px #7b2cbf;
+}
+
+/* Pulse Animation on Hover */
+.feature-card:hover .icon-glass svg {
+    filter: drop-shadow(0 0 5px currentColor);
+    transform: scale(1.1);
+    animation: pulse-icon 2s infinite ease-in-out;
+}
+
+@keyframes pulse-icon {
+    0% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
 }
 
 .feature-title {
