@@ -1191,3 +1191,185 @@ footer a:hover {
     padding: 20px;
     border-radius: 0 10px 10px 0;
 }
+
+/* ===========================
+   What's New Section
+   =========================== */
+.whats-new-section {
+    padding: 60px 0;
+    background: linear-gradient(180deg, rgba(123, 44, 191, 0.08) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.whats-new-section .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.version-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #7b2cbf, #f72585);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(247, 37, 133, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(247, 37, 133, 0.6), 0 0 50px rgba(123, 44, 191, 0.3); }
+}
+
+.new-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.new-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    border-radius: 15px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.new-feature-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(247, 37, 133, 0.4);
+    box-shadow: 0 10px 25px rgba(247, 37, 133, 0.1);
+}
+
+.new-feature-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.new-feature-icon.icon-bg-pink {
+    background: rgba(247, 37, 133, 0.15);
+    border: 1px solid rgba(247, 37, 133, 0.3);
+    color: #f72585;
+}
+
+.new-feature-icon.icon-bg-cyan {
+    background: rgba(76, 201, 240, 0.15);
+    border: 1px solid rgba(76, 201, 240, 0.3);
+    color: #4cc9f0;
+}
+
+.new-feature-icon.icon-bg-purple {
+    background: rgba(123, 44, 191, 0.15);
+    border: 1px solid rgba(123, 44, 191, 0.3);
+    color: #7b2cbf;
+}
+
+.new-feature-item h4 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+.new-feature-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* New badge for feature cards */
+.feature-badge-new {
+    display: inline-block;
+    background: linear-gradient(135deg, #f72585, #7b2cbf);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* ===========================
+   What's New Standalone Page
+   =========================== */
+.changelog-entry {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.changelog-entry::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+}
+
+.changelog-version {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.changelog-date {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.changelog-category {
+    margin-bottom: 20px;
+}
+
+.changelog-category h3 {
+    color: #4cc9f0;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.changelog-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.changelog-category li {
+    color: var(--text-muted);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.changelog-category li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #f72585;
+    font-weight: 700;
+}

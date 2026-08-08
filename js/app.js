@@ -97,7 +97,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 track.scrollBy({ left: 300, behavior: 'smooth' });
             });
         }
+
+        // Keyboard navigation for carousel
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                track.scrollBy({ left: -300, behavior: 'smooth' });
+            } else if (e.key === 'ArrowRight') {
+                track.scrollBy({ left: 300, behavior: 'smooth' });
+            }
+        });
     }
+
+    // ESC key to close active modals
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+            closeEcosystemModal();
+        }
+    });
 
     // Scroll Reveal Animation (IntersectionObserver)
     const revealElements = document.querySelectorAll('.reveal');

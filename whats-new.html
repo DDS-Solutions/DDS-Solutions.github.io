@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100b20">
+    <title>What's New | Pro Wifi Camera Remote</title>
+    <meta name="description"
+        content="See what's new in Pro Wifi Camera Remote. Version history, new features, and improvements for your secure local monitoring app.">
+    <link rel="canonical" href="https://dds-solutions.github.io/whats-new.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://dds-solutions.github.io/whats-new.html">
+    <meta property="og:title" content="What's New | Pro Wifi Camera Remote">
+    <meta property="og:description"
+        content="See what's new in Pro Wifi Camera Remote. Version history, new features, and improvements.">
+    <meta property="og:image" content="https://dds-solutions.github.io/images/screenshots/home-screen.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dds-solutions.github.io/whats-new.html">
+    <meta property="twitter:title" content="What's New | Pro Wifi Camera Remote">
+    <meta property="twitter:description"
+        content="See what's new in Pro Wifi Camera Remote. Version history, new features, and improvements.">
+    <meta property="twitter:image" content="https://dds-solutions.github.io/images/screenshots/home-screen.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Breadcrumbs -->
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> &gt; <span>What's New</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header style="min-height: 40vh; padding: 60px 20px;">
+        <div class="container hero-content">
+            <h1 class="hero-title" style="font-size: 3rem;">
+                <span class="color-wave">What's New</span>
+            </h1>
+            <p class="hero-subtitle">
+                Every update brings new features, improvements, and fixes. Here's what we've been working on.
+            </p>
+        </div>
+    </header>
+
+    <!-- Changelog Entries -->
+    <section style="padding: 60px 0;">
+        <div class="container" style="max-width: 800px;">
+
+            <!-- Version 1.2 -->
+            <div class="changelog-entry reveal">
+                <h2 class="changelog-version gradient-text">Version 1.2</h2>
+                <p class="changelog-date">August 2026</p>
+
+                <div class="changelog-category">
+                    <h3>✨ Added</h3>
+                    <ul>
+                        <li><strong>Remote Start</strong> — Start a camera device remotely from your monitor. No need to physically interact with the camera device.</li>
+                        <li><strong>Front / Back Camera Selection</strong> — Choose between front-facing and rear camera before starting. Ideal for different mounting positions.</li>
+                        <li><strong>Remote Settings</strong> — Configure camera settings remotely from the monitor device, including alert sounds and motion detection.</li>
+                    </ul>
+                </div>
+
+                <div class="changelog-category">
+                    <h3>🔧 Improved</h3>
+                    <ul>
+                        <li>Updated to latest Android SDK (targetSdk 35, compileSdk 36)</li>
+                        <li>Improved overall stability and performance</li>
+                        <li>Enhanced Koin dependency injection (4.0.2 → 4.x)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Version 1.1 -->
+            <div class="changelog-entry reveal">
+                <h2 class="changelog-version gradient-text">Version 1.1</h2>
+                <p class="changelog-date">February 2026</p>
+
+                <div class="changelog-category">
+                    <h3>✨ Added</h3>
+                    <ul>
+                        <li><strong>Custom Sound Picker</strong> — Select custom audio files for alerts from your device storage.</li>
+                        <li><strong>Alert Looping</strong> — Option to loop alert sounds continuously until dismissed.</li>
+                        <li><strong>Alert Duration</strong> — Configurable alert duration from 1 to 120 seconds.</li>
+                        <li><strong>Motion Zone Detection</strong> — Define specific screen areas for motion detection instead of monitoring the entire frame.</li>
+                        <li><strong>Web Interface</strong> — Access your camera stream from any browser on your local network.</li>
+                        <li><strong>Black Screen Mode</strong> — Stealth mode for covert monitoring. Turn off the camera device's screen while streaming continues.</li>
+                        <li><strong>Remote Alert Settings</strong> — Configure alert preferences from the monitor device.</li>
+                    </ul>
+                </div>
+
+                <div class="changelog-category">
+                    <h3>🔧 Changed</h3>
+                    <ul>
+                        <li>Renamed "Siren" to "Alert" — more appropriate terminology throughout the app.</li>
+                        <li>Updated CameraX 1.5.2 → 1.5.3</li>
+                        <li>Updated Ktor 3.3.3 → 3.4.0</li>
+                        <li>Updated Compose BOM 2025.12.00 → 2026.01.01</li>
+                        <li>Migrated from Koin 3.5.6 to 4.0.2 with new API</li>
+                        <li>Improved localization — added missing translations for all supported languages</li>
+                    </ul>
+                </div>
+
+                <div class="changelog-category">
+                    <h3>🐛 Fixed</h3>
+                    <ul>
+                        <li>Motion detection zone bounds not persisting across app restarts</li>
+                        <li>Audio permission flow on Android 13+</li>
+                        <li>Black screen mode not syncing with monitor device</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Version 1.0 -->
+            <div class="changelog-entry reveal">
+                <h2 class="changelog-version gradient-text">Version 1.0</h2>
+                <p class="changelog-date">December 2025</p>
+
+                <div class="changelog-category">
+                    <h3>🚀 Initial Release</h3>
+                    <ul>
+                        <li>Real-time video streaming over WiFi</li>
+                        <li>Audio streaming support</li>
+                        <li>Motion detection with configurable sensitivity</li>
+                        <li>Remote camera controls: zoom, torch/flash, photo capture, video recording</li>
+                        <li>Device discovery via NSD (Network Service Discovery)</li>
+                        <li>Material You theming with dynamic colors</li>
+                        <li>Portrait and landscape orientation support</li>
+                        <li>Settings persistence</li>
+                    </ul>
+                </div>
+
+                <div class="changelog-category">
+                    <h3>🌐 Languages</h3>
+                    <ul>
+                        <li>English (default)</li>
+                        <li>German (Deutsch)</li>
+                        <li>Spanish (Español)</li>
+                        <li>French (Français)</li>
+                        <li>Portuguese (Português)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Planned -->
+            <div class="changelog-entry reveal" style="border-style: dashed;">
+                <h2 class="changelog-version" style="color: var(--text-muted);">Coming Soon</h2>
+                <p class="changelog-date">On the roadmap</p>
+
+                <div class="changelog-category">
+                    <h3>🗺️ Planned</h3>
+                    <ul>
+                        <li>Cloud recording integration</li>
+                        <li>Multi-camera support</li>
+                        <li>Push notifications for motion alerts</li>
+                        <li>Recording schedule configuration</li>
+                        <li>Enhanced web interface with full controls</li>
+                        <li>iOS companion app</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding: 60px 0; text-align: center;">
+        <div class="container">
+            <h2 class="reveal">Ready to Get Started?</h2>
+            <p style="color: var(--text-muted); margin: 15px 0 30px;">Download the app and start monitoring in seconds.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
+                class="btn btn-primary btn-wave" target="_blank">Download on Google Play</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <p>&copy; 2026 DDS Solutions. All rights reserved.</p>
+                <div style="margin-top: 10px;">
+                    <a href="index.html"
+                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Home</a> |
+                    <a href="whats-new.html"
+                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">What's New</a> |
+                    <a href="privacy.html"
+                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
+                    <a href="terms.html" style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">User
+                        Agreement</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll & Reveal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const revealElements = document.querySelectorAll('.reveal');
+            if (revealElements.length === 0) return;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
