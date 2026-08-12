@@ -1,3 +1,28 @@
+/* Local Inter Font Declarations */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/inter-v13-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/inter-v13-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/inter-v13-latin-700.woff2') format('woff2');
+}
+
 /* Global Variables & Reset */
 :root {
     --bg-color: #100b20;

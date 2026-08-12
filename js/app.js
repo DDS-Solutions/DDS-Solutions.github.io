@@ -1,38 +1,69 @@
 
 // Modal Logic
 function openModal() {
-    document.getElementById('featureModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent scroll
+    const modal = document.getElementById('featureModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scroll
+    }
 }
 
 function closeModal() {
-    document.getElementById('featureModal').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scroll
+    const modal = document.getElementById('featureModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scroll
+    }
 }
 
 function openEcosystemModal() {
-    document.getElementById('ecosystemModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    const modal = document.getElementById('ecosystemModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeEcosystemModal() {
-    document.getElementById('ecosystemModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close on outside click
-window.onclick = function (event) {
-    const featureModal = document.getElementById('featureModal');
-    const ecosystemModal = document.getElementById('ecosystemModal');
-    if (event.target == featureModal) {
-        closeModal();
-    }
-    if (event.target == ecosystemModal) {
-        closeEcosystemModal();
+    const modal = document.getElementById('ecosystemModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Modal Event Listeners
+    const openEcosystemBtn = document.getElementById('openEcosystemModalBtn');
+    if (openEcosystemBtn) {
+        openEcosystemBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            openEcosystemModal();
+        });
+    }
+
+    const closeFeatureBtn = document.getElementById('closeFeatureModalBtn');
+    if (closeFeatureBtn) {
+        closeFeatureBtn.addEventListener('click', closeModal);
+    }
+
+    const closeEcosystemBtn = document.getElementById('closeEcosystemModalBtn');
+    if (closeEcosystemBtn) {
+        closeEcosystemBtn.addEventListener('click', closeEcosystemModal);
+    }
+
+    // Close on outside click
+    window.addEventListener('click', function (event) {
+        const featureModal = document.getElementById('featureModal');
+        const ecosystemModal = document.getElementById('ecosystemModal');
+        if (featureModal && event.target === featureModal) {
+            closeModal();
+        }
+        if (ecosystemModal && event.target === ecosystemModal) {
+            closeEcosystemModal();
+        }
+    });
+
     // Screenshot Carousel Logic
     const track = document.getElementById('carouselTrack');
     const dotsContainer = document.getElementById('carouselDots');

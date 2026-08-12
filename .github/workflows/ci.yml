@@ -1,0 +1,24 @@
+name: Site Security & Audit Suite
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    name: Validate Site Integrity & CSP Compliance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Site Audit & Validation Suite
+        run: python scripts/validate_site.py

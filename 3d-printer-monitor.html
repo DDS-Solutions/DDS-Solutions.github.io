@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#100b20">
     <!-- SEO Meta Tags -->
@@ -28,10 +29,7 @@
         content="3d printer camera, remote 3d print monitor, octoprint alternative, android 3d print camera, spaghetti detective alternative">
     <link rel="canonical" href="https://dds-solutions.github.io/3d-printer-monitor.html">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -331,25 +329,7 @@
         </div>
     </footer>
 
-    <!-- Scroll & Reveal Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const revealElements = document.querySelectorAll('.reveal');
-            if (revealElements.length === 0) return;
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            revealElements.forEach(el => observer.observe(el));
-        });
-    </script>
+    <script src="js/app.js" defer></script>
 </body>
 
 </html>

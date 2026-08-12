@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#100b20">
     <meta name="google-site-verification" content="google63801b77e053c16e" />
@@ -54,10 +55,7 @@
         content="Turn your old phone into a secure, local security camera. No internet required, no cloud fees. 100% local and private.">
     <meta property="twitter:image" content="https://dds-solutions.github.io/images/screenshots/home-screen.png">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -81,7 +79,7 @@
             <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
                 class="btn btn-primary btn-wave" target="_blank" rel="noopener noreferrer">Download on Google Play</a>
             <p class="hero-secondary-link">
-                <a href="javascript:void(0)" onclick="openEcosystemModal()" class="feature-guide-link">
+                <a href="#" id="openEcosystemModalBtn" class="feature-guide-link">
                     Learn about multi-device support →
                 </a>
             </p>
@@ -695,7 +693,7 @@
     <!-- Modal for Remote Camera System Overview -->
     <div id="featureModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <span class="close-btn" id="closeFeatureModalBtn">&times;</span>
 
             <!-- Modal Header -->
             <div class="modal-header">
@@ -827,7 +825,7 @@
     <!-- Modal for Multi-Device Ecosystem -->
     <div id="ecosystemModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeEcosystemModal()">&times;</span>
+            <span class="close-btn" id="closeEcosystemModalBtn">&times;</span>
             <div class="modal-header">
                 <h1 class="modal-main-title">Multi-Device Ecosystem</h1>
                 <p class="modal-subtitle">Flexible monitoring solutions for every screen.</p>
@@ -887,7 +885,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-TSThZ0Ni/1nhxo98xXoNWH1jC/Tmq63wPFo+HuFqzXY=" crossorigin="anonymous" defer></script>
     <script src="js/app.js" defer></script>
 
 </body>
