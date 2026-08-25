@@ -1,0 +1,28 @@
+# Environment and Secrets
+.env
+.env.*
+!.env.example
+credentials.json
+token.json
+*.pem
+*.key
+*.p12
+*.jks
+
+# Temporary files & directories
+.tmp/
+temp/
+scratch/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*~
