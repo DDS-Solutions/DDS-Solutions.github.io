@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import json
 import os
 import re
@@ -7,13 +8,17 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
-# Global error counter
+# Global error / warning collectors
 errors = []
+warnings = []
 
 def log_error(file_path, line_num, message):
     error_str = f"[FAIL] {file_path}:{line_num} - {message}"
     errors.append(error_str)
-    print(error_str)
+
+def log_warning(file_path, line_num, message):
+    warn_str = f"[WARN] {file_path}:{line_num} - {message}"
+    warnings.append(warn_str)
 
 def log_info(message):
     print(f"[INFO] {message}")
@@ -24,6 +29,7 @@ class SiteHTMLParser(HTMLParser):
         self.file_path = file_path
         self.has_csp = False
         self.csp_content = ""
+        self.has_noindex = False
         self.current_tag = None
         self.current_attrs = {}
         self.in_script = False
@@ -35,14 +41,22 @@ class SiteHTMLParser(HTMLParser):
         self.links_to_check = []   # List of (href, line)
 
     def handle_starttag(self, tag, attrs):
-        attr_dict = {k.lower(): v for k, v in attrs}
+        # Gracefully handle valueless attributes where v is None
+        attr_dict = {k.lower(): (v if v is not None else "") for k, v in attrs}
         line_num = self.getpos()[0]
 
-        # Check CSP meta tag
+        # Check CSP meta tag and robots meta tag
         if tag.lower() == 'meta':
-            if attr_dict.get('http-equiv', '').lower() == 'content-security-policy':
+            http_equiv = (attr_dict.get('http-equiv') or '').lower()
+            if http_equiv == 'content-security-policy':
                 self.has_csp = True
-                self.csp_content = attr_dict.get('content', '')
+                self.csp_content = attr_dict.get('content') or ''
+
+            meta_name = (attr_dict.get('name') or '').lower()
+            if meta_name == 'robots':
+                content_val = (attr_dict.get('content') or '').lower()
+                if 'noindex' in content_val:
+                    self.has_noindex = True
 
         # Check inline event handlers (e.g., onclick, onload)
         for attr_name, attr_val in attrs:
@@ -54,20 +68,25 @@ class SiteHTMLParser(HTMLParser):
             if attr_val and attr_val.strip().lower().startswith('javascript:'):
                 log_error(self.file_path, line_num, f"Forbidden 'javascript:' URI found in attribute '{attr_name}'")
 
-        # Collect local assets (<img src>, <script src>, <link href>)
+        # Collect local assets and check SRI on external assets
         if tag.lower() == 'img' and 'src' in attr_dict:
             self.assets_to_check.append(('src', attr_dict['src'], line_num))
         elif tag.lower() == 'script' and 'src' in attr_dict:
-            self.assets_to_check.append(('src', attr_dict['src'], line_num))
-            # SRI check for external scripts
             src_val = attr_dict['src']
+            self.assets_to_check.append(('src', src_val, line_num))
+            # SRI check for external scripts
             if src_val.startswith('http://') or src_val.startswith('https://'):
                 if 'integrity' not in attr_dict or 'crossorigin' not in attr_dict:
                     log_error(self.file_path, line_num, f"External script '{src_val}' missing 'integrity' or 'crossorigin' attribute")
         elif tag.lower() == 'link' and 'href' in attr_dict:
-            rel_val = attr_dict.get('rel', '').lower()
-            if rel_val in ['stylesheet', 'icon', 'shortcut icon', 'apple-touch-icon']:
-                self.assets_to_check.append(('href', attr_dict['href'], line_num))
+            href_val = attr_dict['href']
+            rel_val = (attr_dict.get('rel') or '').lower()
+            if rel_val in ['stylesheet', 'icon', 'shortcut icon', 'apple-touch-icon', 'preload']:
+                self.assets_to_check.append(('href', href_val, line_num))
+            # SRI check for external stylesheets
+            if rel_val == 'stylesheet' and (href_val.startswith('http://') or href_val.startswith('https://')):
+                if 'integrity' not in attr_dict or 'crossorigin' not in attr_dict:
+                    log_error(self.file_path, line_num, f"External stylesheet '{href_val}' missing 'integrity' or 'crossorigin' attribute")
 
         # Collect internal links (<a href>)
         if tag.lower() == 'a' and 'href' in attr_dict:
@@ -76,7 +95,7 @@ class SiteHTMLParser(HTMLParser):
         # Check for inline script blocks
         if tag.lower() == 'script':
             self.in_script = True
-            self.script_type = attr_dict.get('type', '').lower()
+            self.script_type = (attr_dict.get('type') or '').lower()
             self.script_content = ""
             self.script_line = line_num
             # If script tag has src, it's external script file link, not inline block
@@ -100,7 +119,7 @@ class SiteHTMLParser(HTMLParser):
                         log_error(self.file_path, self.script_line, f"Invalid JSON-LD syntax: {e}")
                 else:
                     # Executable inline script found
-                    log_error(self.file_path, self.script_line, f"Forbidden executable inline <script> block found")
+                    log_error(self.file_path, self.script_line, "Forbidden executable inline <script> block found")
 
 def validate_html_file(file_path, root_dir):
     rel_path = file_path.relative_to(root_dir)
@@ -130,7 +149,6 @@ def validate_html_file(file_path, root_dir):
     for attr, target, line_num in parser.assets_to_check:
         if target.startswith('http://') or target.startswith('https://') or target.startswith('data:'):
             continue
-        # Clean query string or anchor
         clean_target = target.split('?')[0].split('#')[0]
         if clean_target.startswith('/'):
             asset_path = root_dir / clean_target.lstrip('/')
@@ -155,8 +173,48 @@ def validate_html_file(file_path, root_dir):
         if not link_path.exists():
             log_error(rel_path, line_num, f"Referenced local link target does not exist: '{href}'")
 
+    # 5. Template file indexing audit
+    if file_path.name == 'use-case-template.html':
+        if not parser.has_noindex:
+            log_error(rel_path, 1, "Template 'use-case-template.html' is missing '<meta name=\"robots\" content=\"noindex\">'")
+
+def validate_assetlinks(root_dir):
+    assetlinks_path = root_dir / '.well-known' / 'assetlinks.json'
+    if not assetlinks_path.exists():
+        log_error(".well-known/assetlinks.json", 1, "Missing .well-known/assetlinks.json file")
+        return
+
+    try:
+        data = json.loads(assetlinks_path.read_text(encoding='utf-8'))
+        for entry in data:
+            target = entry.get('target', {})
+            fingerprints = target.get('sha256_cert_fingerprints', [])
+            for fp in fingerprints:
+                if 'REPLACE_WITH_REAL_KEY' in fp or fp.startswith('XX:'):
+                    log_warning(".well-known/assetlinks.json", 1, f"Placeholder SHA-256 fingerprint found: '{fp}'. Update with production key from Play Console.")
+    except Exception as e:
+        log_error(".well-known/assetlinks.json", 1, f"Invalid assetlinks.json format: {e}")
+
+def validate_robots_and_sitemap(root_dir):
+    robots_path = root_dir / 'robots.txt'
+    if robots_path.exists():
+        robots_text = robots_path.read_text(encoding='utf-8')
+        if 'Disallow: /use-case-template.html' not in robots_text:
+            log_error("robots.txt", 1, "Missing 'Disallow: /use-case-template.html' rule")
+
+    sitemap_path = root_dir / 'sitemap.xml'
+    if sitemap_path.exists():
+        sitemap_text = sitemap_path.read_text(encoding='utf-8')
+        if 'https://dds-solutions.github.io/index.html' in sitemap_text:
+            log_error("sitemap.xml", 1, "Duplicate entry 'https://dds-solutions.github.io/index.html' in sitemap.xml. Use canonical root '/' only.")
+
 def main():
-    root_dir = Path(__file__).resolve().parent.parent
+    parser = argparse.ArgumentParser(description="Site integrity, security, and CSP auditor.")
+    parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parent.parent,
+                        help="Root directory of the static site")
+    args = parser.parse_args()
+
+    root_dir = args.root.resolve()
     log_info(f"Starting site validation in root directory: {root_dir}")
 
     html_files = [f for f in sorted(list(root_dir.glob('*.html'))) if not f.name.startswith('google')]
@@ -165,14 +223,22 @@ def main():
     for html_file in html_files:
         validate_html_file(html_file, root_dir)
 
+    validate_assetlinks(root_dir)
+    validate_robots_and_sitemap(root_dir)
+
     print("\n--- Audit Summary ---")
+    if warnings:
+        print(f"WARNINGS ({len(warnings)}):")
+        for warn in warnings:
+            print(f"  - {warn}")
+
     if errors:
-        print(f"FAILED: Found {len(errors)} error(s) during validation:")
+        print(f"\nFAILED: Found {len(errors)} error(s) during validation:")
         for err in errors:
             print(f"  - {err}")
         sys.exit(1)
     else:
-        print("SUCCESS: 100% of validation and security checks passed cleanly!")
+        print(f"\nSUCCESS: 100% of validation and security checks passed cleanly across {len(html_files)} pages!")
         sys.exit(0)
 
 if __name__ == '__main__':

@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#100b20">
     <title>What's New | Pro Wifi Camera Remote</title>
@@ -28,6 +29,20 @@
     <meta property="twitter:image" content="https://dds-solutions.github.io/images/screenshots/home-screen.png">
 
 
+
+        <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Font Preloads for Performance / LCP -->
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-600.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-700.woff2" type="font/woff2" crossorigin>
+
+    <!-- Progressive Enhancement Fallback for Animations -->
+    <noscript>
+        <style>
+            .reveal { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -66,10 +81,14 @@
                 <div class="changelog-category">
                     <h3>✨ Added</h3>
                     <ul>
-                        <li><strong>Remote Start</strong> — Start a camera device remotely from your monitor. No need to physically interact with the camera device.</li>
-                        <li><strong>Front / Back Camera Selection</strong> — Choose between front-facing and rear camera before starting. Ideal for different mounting positions.</li>
-                        <li><strong>Customizable Appearance & Themes</strong> — Customize app interface appearance with dynamic Material You color profiles and dark mode settings.</li>
-                        <li><strong>Remote Settings</strong> — Configure camera settings remotely from the monitor device, including alert sounds and motion detection.</li>
+                        <li><strong>Remote Start</strong> — Start a camera device remotely from your monitor. No need to
+                            physically interact with the camera device.</li>
+                        <li><strong>Front / Back Camera Selection</strong> — Choose between front-facing and rear camera
+                            before starting. Ideal for different mounting positions.</li>
+                        <li><strong>Customizable Appearance & Themes</strong> — Customize app interface appearance with
+                            dynamic Material You color profiles and dark mode settings.</li>
+                        <li><strong>Remote Settings</strong> — Configure camera settings remotely from the monitor
+                            device, including alert sounds and motion detection.</li>
                     </ul>
                 </div>
 
@@ -91,13 +110,19 @@
                 <div class="changelog-category">
                     <h3>✨ Added</h3>
                     <ul>
-                        <li><strong>Custom Sound Picker</strong> — Select custom audio files for alerts from your device storage.</li>
-                        <li><strong>Alert Looping</strong> — Option to loop alert sounds continuously until dismissed.</li>
+                        <li><strong>Custom Sound Picker</strong> — Select custom audio files for alerts from your device
+                            storage.</li>
+                        <li><strong>Alert Looping</strong> — Option to loop alert sounds continuously until dismissed.
+                        </li>
                         <li><strong>Alert Duration</strong> — Configurable alert duration from 1 to 120 seconds.</li>
-                        <li><strong>Motion Detection</strong> — Detect motion in your camera's field of view and receive instant alerts when movement occurs.</li>
-                        <li><strong>Web Interface</strong> — Access your camera stream from any browser on your local network.</li>
-                        <li><strong>Black Screen Mode</strong> — Stealth mode for covert monitoring. Turn off the camera device's screen while streaming continues.</li>
-                        <li><strong>Remote Alert Settings</strong> — Configure alert preferences from the monitor device.</li>
+                        <li><strong>Motion Detection</strong> — Detect motion in your camera's field of view and receive
+                            instant alerts when movement occurs.</li>
+                        <li><strong>Web Interface</strong> — Access your camera stream from any browser on your local
+                            network.</li>
+                        <li><strong>Black Screen Mode</strong> — Stealth mode for covert monitoring. Turn off the camera
+                            device's screen while streaming continues.</li>
+                        <li><strong>Remote Alert Settings</strong> — Configure alert preferences from the monitor
+                            device.</li>
                     </ul>
                 </div>
 
@@ -179,7 +204,8 @@
     <section style="padding: 60px 0; text-align: center;">
         <div class="container">
             <h2 class="reveal">Ready to Get Started?</h2>
-            <p style="color: var(--text-muted); margin: 15px 0 30px;">Download the app and start monitoring in seconds.</p>
+            <p style="color: var(--text-muted); margin: 15px 0 30px;">Download the app and start monitoring in seconds.
+            </p>
             <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
                 class="btn btn-primary btn-wave" target="_blank" rel="noopener noreferrer">Download on Google Play</a>
         </div>

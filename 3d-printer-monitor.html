@@ -31,6 +31,20 @@
 
 
 
+        <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Font Preloads for Performance / LCP -->
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-600.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-700.woff2" type="font/woff2" crossorigin>
+
+    <!-- Progressive Enhancement Fallback for Animations -->
+    <noscript>
+        <style>
+            .reveal { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -64,14 +78,14 @@
     <!-- Problem / Solution Section -->
     <section class="problem-solution-section">
         <div class="container">
-            <h2 class="reveal" style="text-align: center; margin-bottom: 20px;">Why Setup Raspberry Pi?</h2>
+            <h2 class="reveal" style="text-align: center; margin-bottom: 20px;">Why Set Up a Dedicated Pi?</h2>
             <div class="comparison-grid reveal reveal-stagger">
 
                 <!-- The Old Way -->
                 <div class="comparison-card bad">
                     <h3 style="color: #ef233c; margin-bottom: 15px;">OctoPrint / Pi Setup</h3>
                     <ul style="list-style: none; color: var(--text-muted);">
-                        <li style="margin-bottom: 10px;">❌ Raspberry Pis are expensive/rare</li>
+                        <li style="margin-bottom: 10px;">❌ Requires extra hardware & Pi purchases</li>
                         <li style="margin-bottom: 10px;">❌ Complex Configuration</li>
                         <li>❌ Requires extra webcams</li>
                     </ul>
@@ -99,7 +113,7 @@
                 <!-- Feature 1 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
@@ -116,7 +130,7 @@
                 <!-- Feature 2 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="22" y1="12" x2="18" y2="12"></line>
@@ -133,7 +147,7 @@
                 <!-- Feature 3 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
                         </svg>
@@ -214,7 +228,7 @@
                 <!-- Baby Monitor -->
                 <a href="baby-monitor.html" class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
@@ -229,7 +243,7 @@
                 <!-- Front Door Cam -->
                 <a href="front-door-cam.html" class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -239,24 +253,24 @@
                     <p class="feature-desc">See who is at the door without expensive subscriptions.</p>
                 </a>
 
-                <!-- Pet Watcher -->
+                <!-- Pet Monitor -->
                 <a href="pet-monitor.html" class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Pet Watcher</h3>
+                    <h3 class="feature-title">Pet Monitoring</h3>
                     <p class="feature-desc">Check on your pets while in another room.</p>
                 </a>
 
                 <!-- Garage Security -->
                 <a href="garage-security.html" class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="1" y="3" width="15" height="13"></rect>
                             <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
@@ -271,7 +285,7 @@
                 <!-- Home Lab -->
                 <a href="home-lab-monitor.html" class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
@@ -283,7 +297,7 @@
                 <!-- Air-Gapped Security -->
                 <a href="air-gapped-security.html" class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         </svg>
@@ -295,14 +309,14 @@
                 <!-- Wildlife Monitor -->
                 <a href="wildlife-monitor.html" class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
                             <line x1="16" y1="8" x2="2" y2="22"></line>
                             <line x1="17.5" y1="15" x2="9" y2="15"></line>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Birds & Wild Life</h3>
+                    <h3 class="feature-title">Wildlife Monitor</h3>
                     <p class="feature-desc">Watch birds at the feeder or wild life in action from a safe distance.</p>
                 </a>
 

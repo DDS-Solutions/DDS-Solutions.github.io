@@ -192,7 +192,7 @@ h3 {
     }
 }
 
-/* Layout Compontents */
+/* Layout Components */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -562,6 +562,20 @@ footer a:hover {
     font-size: 2rem;
     cursor: pointer;
     color: #4cc9f0;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #f72585;
+    outline: none;
 }
 
 /* Modal Header */
@@ -1026,7 +1040,7 @@ footer a:hover {
     display: inline-block;
     width: 30px;
     height: 30px;
-    background: var(--gradient-primary);
+    background: var(--primary-gradient);
     color: white;
     border-radius: 50%;
     text-align: center;

@@ -31,6 +31,20 @@
 
 
 
+        <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Font Preloads for Performance / LCP -->
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-600.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-700.woff2" type="font/woff2" crossorigin>
+
+    <!-- Progressive Enhancement Fallback for Animations -->
+    <noscript>
+        <style>
+            .reveal { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -99,7 +113,7 @@
                 <!-- Feature 1 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18">
@@ -114,7 +128,7 @@
                 <!-- Feature 2 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                         </svg>
@@ -127,7 +141,7 @@
                 <!-- Feature 3 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         </svg>
@@ -209,7 +223,7 @@
                 <!-- Baby Monitor -->
                 <a href="baby-monitor.html" class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
@@ -224,7 +238,7 @@
                 <!-- Front Door Cam -->
                 <a href="front-door-cam.html" class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -234,24 +248,24 @@
                     <p class="feature-desc">See who is at the door without expensive subscriptions.</p>
                 </a>
 
-                <!-- Pet Watcher -->
+                <!-- Pet Monitor -->
                 <a href="pet-monitor.html" class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Pet Watcher</h3>
+                    <h3 class="feature-title">Pet Monitoring</h3>
                     <p class="feature-desc">Check on your pets while in another room.</p>
                 </a>
 
                 <!-- 3D Print Monitoring -->
                 <a href="3d-printer-monitor.html" class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="6 9 6 2 18 2 18 9"></polyline>
                             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
@@ -265,7 +279,7 @@
                 <!-- Home Lab -->
                 <a href="home-lab-monitor.html" class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
@@ -277,7 +291,7 @@
                 <!-- Air-Gapped Security -->
                 <a href="air-gapped-security.html" class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         </svg>
@@ -289,14 +303,14 @@
                 <!-- Wildlife Monitor -->
                 <a href="wildlife-monitor.html" class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
                             <line x1="16" y1="8" x2="2" y2="22"></line>
                             <line x1="17.5" y1="15" x2="9" y2="15"></line>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Birds & Wild Life</h3>
+                    <h3 class="feature-title">Wildlife Monitor</h3>
                     <p class="feature-desc">Watch birds at the feeder or wild life in action from a safe distance.</p>
                 </a>
 

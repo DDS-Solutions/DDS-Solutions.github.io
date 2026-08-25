@@ -8,10 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#100b20">
     <meta name="google-site-verification" content="google63801b77e053c16e" />
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Pro Wifi Camera Remote | Secure Local Monitoring</title>
     <meta name="description"
         content="Turn your old phone into a secure, local security camera with motion zone detection, custom alerts, front/back camera selection, and remote start. No internet required, no cloud fees. 100% local and private.">
     <link rel="canonical" href="https://dds-solutions.github.io/">
+
+    <!-- Font Preloads for Performance / LCP -->
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-600.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="fonts/inter-v13-latin-700.woff2" type="font/woff2" crossorigin>
+
+    <!-- Progressive Enhancement Fallback for Animations -->
+    <noscript>
+        <style>
+            .reveal { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -25,11 +38,6 @@
             "@type": "Offer",
             "price": "1.99",
             "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.5",
-            "ratingCount": "100"
         },
         "description": "Turn your old phone into a secure, local security camera. Motion zone detection, custom alerts, remote start, front/back camera selection. No internet required.",
         "url": "https://dds-solutions.github.io/",
@@ -57,8 +65,6 @@
         content="Turn your old phone into a secure, local security camera. No internet required, no cloud fees. 100% local and private.">
     <meta property="twitter:image" content="https://dds-solutions.github.io/images/screenshots/home-screen.png">
 
-
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -69,7 +75,7 @@
     <header>
         <div class="container hero-content">
             <h1 class="hero-title">
-                <span class="color-wave">Turn your older smartphones into A</span> <br>
+                <span class="color-wave">Turn your older smartphones into a</span> <br>
                 <span class="color-wave">Remote Camera System</span>
             </h1>
             <div class="hero-slogan gradient-text">
@@ -81,8 +87,11 @@
             <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
                 class="btn btn-primary btn-wave" target="_blank" rel="noopener noreferrer">Download on Google Play</a>
             <p class="hero-secondary-link">
+                <a href="#" id="openFeatureModalBtn" class="feature-guide-link" style="margin-right: 15px;">
+                    How it works overview →
+                </a>
                 <a href="#" id="openEcosystemModalBtn" class="feature-guide-link">
-                    Learn about multi-device support →
+                    Multi-device support →
                 </a>
             </p>
         </div>
@@ -99,7 +108,7 @@
             <div class="new-features-grid reveal reveal-stagger">
                 <div class="new-feature-item">
                     <div class="new-feature-icon icon-bg-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <rect x="7" y="7" width="10" height="10" rx="1" ry="1" stroke-dasharray="3 2"></rect>
@@ -112,7 +121,7 @@
                 </div>
                 <div class="new-feature-item">
                     <div class="new-feature-icon icon-bg-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                             <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -126,7 +135,7 @@
                 </div>
                 <div class="new-feature-item">
                     <div class="new-feature-icon icon-bg-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                             <line x1="8" y1="21" x2="16" y2="21"></line>
@@ -141,7 +150,7 @@
                 </div>
                 <div class="new-feature-item">
                     <div class="new-feature-icon icon-bg-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                         </svg>
@@ -154,7 +163,7 @@
                 </div>
                 <div class="new-feature-item">
                     <div class="new-feature-icon icon-bg-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
                             </path>
@@ -169,7 +178,7 @@
                 </div>
                 <div class="new-feature-item">
                     <div class="new-feature-icon icon-bg-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -186,7 +195,7 @@
                 </div>
                 <div class="new-feature-item">
                     <div class="new-feature-icon icon-bg-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.72 1.7-1.65 0-.43-.17-.83-.44-1.14-.29-.33-.46-.77-.46-1.21 0-.93.75-1.68 1.68-1.68h1.86c2.6 0 4.66-2.06 4.66-4.66 0-5.32-4.14-9.66-9-9.66z">
@@ -218,7 +227,7 @@
                 <div class="carousel-track" id="carouselTrack">
                     <!-- Slide: App Start Up Screen -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/app-startup.png" alt="App Start Up Screen">
+                        <img src="images/screenshots/app-startup.png" alt="App Start Up Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>App Start Up Screen</h4>
                             <p>Initialize your remote camera experience</p>
@@ -226,7 +235,7 @@
                     </div>
                     <!-- Slide: Home Screen -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/home-screen.png" alt="Home Screen">
+                        <img src="images/screenshots/home-screen.png" alt="Home Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>Home Screen</h4>
                             <p>Choose Camera or Monitor mode</p>
@@ -235,7 +244,7 @@
 
                     <!-- Slide: App Menu -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/app-menu.png" alt="App Menu">
+                        <img src="images/screenshots/app-menu.png" alt="App Menu" loading="lazy">
                         <div class="slide-caption">
                             <h4>App Menu</h4>
                             <p>Easy navigation to all features</p>
@@ -244,7 +253,7 @@
 
                     <!-- Slide: Camera Mode -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/camera-mode.png" alt="Camera Mode">
+                        <img src="images/screenshots/camera-mode.png" alt="Camera Mode" loading="lazy">
                         <div class="slide-caption">
                             <h4>Camera Mode</h4>
                             <p>Stream live video from your device</p>
@@ -253,7 +262,7 @@
 
                     <!-- Slide: Monitor Screen -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/monitor-screen.png" alt="Monitor Screen">
+                        <img src="images/screenshots/monitor-screen.png" alt="Monitor Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>Monitor Screen</h4>
                             <p>Watch live feeds in HD</p>
@@ -262,7 +271,7 @@
 
                     <!-- Slide: Motion Detection -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/motion-detection.png" alt="Motion Detection">
+                        <img src="images/screenshots/motion-detection.png" alt="Motion Detection" loading="lazy">
                         <div class="slide-caption">
                             <h4>Motion Detection</h4>
                             <p>Get alerted when movement is detected</p>
@@ -271,7 +280,7 @@
 
                     <!-- Slide: Camera Selection -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/camera-selection.png" alt="Camera Selection">
+                        <img src="images/screenshots/camera-selection.png" alt="Camera Selection" loading="lazy">
                         <div class="slide-caption">
                             <h4>Camera Selection</h4>
                             <p>Select a camera to monitor</p>
@@ -280,7 +289,7 @@
 
                     <!-- Slide: Settings -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/app-settings.png" alt="App Settings">
+                        <img src="images/screenshots/app-settings.png" alt="App Settings" loading="lazy">
                         <div class="slide-caption">
                             <h4>Settings</h4>
                             <p>Customize your experience</p>
@@ -289,7 +298,7 @@
 
                     <!-- Slide: Front/Back Camera Selection -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/front-back-camera.png" alt="Front/Back Camera Selection">
+                        <img src="images/screenshots/front-back-camera.png" alt="Front/Back Camera Selection" loading="lazy">
                         <div class="slide-caption">
                             <h4>Camera Selection <span class="feature-badge-new">New</span></h4>
                             <p>Choose front or back camera</p>
@@ -298,25 +307,25 @@
 
                     <!-- Slide: Remote Start -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/remote-start.png" alt="Remote Start Screen">
+                        <img src="images/screenshots/remote-start.png" alt="Remote Start Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>Remote Start <span class="feature-badge-new">New</span></h4>
                             <p>Start cameras remotely</p>
                         </div>
                     </div>
 
-                    <!-- Slide: Motion Detection -->
+                    <!-- Slide: Motion Zones -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/motion-detection.png" alt="Motion Detection">
+                        <img src="images/screenshots/motion-detection.png" alt="Motion Detection Zones Screen" loading="lazy">
                         <div class="slide-caption">
-                            <h4>Motion Detection <span class="feature-badge-new">New</span></h4>
-                            <p>Define specific areas to monitor</p>
+                            <h4>Motion Zones <span class="feature-badge-new">New</span></h4>
+                            <p>Define custom motion detection zones</p>
                         </div>
                     </div>
 
                     <!-- Slide: Custom Sound Picker -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/custom-sound-picker.png" alt="Custom Sound Picker">
+                        <img src="images/screenshots/custom-sound-picker.png" alt="Custom Sound Picker" loading="lazy">
                         <div class="slide-caption">
                             <h4>Custom Alerts <span class="feature-badge-new">New</span></h4>
                             <p>Pick your own alert sounds</p>
@@ -325,7 +334,7 @@
 
                     <!-- Slide: Instructions -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/instructions-screen.png" alt="Instructions Screen">
+                        <img src="images/screenshots/instructions-screen.png" alt="Instructions Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>Instructions</h4>
                             <p>How to use the app</p>
@@ -334,7 +343,7 @@
 
                     <!-- Slide: Feature Definitions -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/feature-definitions.png" alt="Feature Definitions Screen">
+                        <img src="images/screenshots/feature-definitions.png" alt="Feature Definitions Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>Feature Definitions</h4>
                             <p>Understand the app symbols</p>
@@ -343,7 +352,7 @@
 
                     <!-- Slide: Privacy Policy -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/privacy-policy.png" alt="Privacy Policy Screen">
+                        <img src="images/screenshots/privacy-policy.png" alt="Privacy Policy Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>Privacy Policy</h4>
                             <p>Your data stays local</p>
@@ -352,7 +361,7 @@
 
                     <!-- Slide: About -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/about-screen.png" alt="About Screen">
+                        <img src="images/screenshots/about-screen.png" alt="About Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>About</h4>
                             <p>App info and support options</p>
@@ -361,7 +370,7 @@
 
                     <!-- Slide: Website Screen -->
                     <div class="carousel-slide">
-                        <img src="images/screenshots/website-screen.png" alt="Website Screen">
+                        <img src="images/screenshots/website-screen.png" alt="Website Screen" loading="lazy">
                         <div class="slide-caption">
                             <h4>Website Screen</h4>
                             <p>Access via web browser</p>
@@ -370,7 +379,7 @@
 
                     <!-- Slide: PC Browser Screen -->
                     <div class="carousel-slide landscape">
-                        <img src="images/screenshots/pc-browser.png" alt="PC Browser Screen" class="no-zoom">
+                        <img src="images/screenshots/pc-browser.png" alt="PC Browser Screen" class="no-zoom" loading="lazy">
                         <div class="slide-caption">
                             <h4>PC Browser Screen</h4>
                             <p>View on your desktop</p>
@@ -394,7 +403,7 @@
                 <!-- Feature 1 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
@@ -409,7 +418,7 @@
                 <!-- Feature 2 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                         </svg>
@@ -423,7 +432,7 @@
                 <!-- Feature 3 -->
                 <div class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
                             <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
@@ -431,7 +440,7 @@
                             <line x1="12" y1="20" x2="12.01" y2="20"></line>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Anywhere Connectivity</h3>
+                    <h3 class="feature-title">Wi-Fi & Hotspot Support</h3>
                     <p class="feature-desc">
                         Works on Wi-Fi or <strong>Mobile Hotspot</strong>. Perfect for travel or areas without internet.
                     </p>
@@ -452,7 +461,7 @@
                 <a href="baby-monitor.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
@@ -467,7 +476,7 @@
                 <a href="front-door-cam.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -480,7 +489,7 @@
                 <a href="pet-monitor.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
@@ -494,7 +503,7 @@
                 <a href="garage-security.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="1" y="3" width="15" height="13"></rect>
                             <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
@@ -509,7 +518,7 @@
                 <a href="3d-printer-monitor.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="6 9 6 2 18 2 18 9"></polyline>
                             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
@@ -523,7 +532,7 @@
                 <a href="home-lab-monitor.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
@@ -535,7 +544,7 @@
                 <a href="air-gapped-security.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         </svg>
@@ -547,7 +556,7 @@
                 <a href="wildlife-monitor.html" class="feature-card"
                     style="border-color: rgba(255,255,255,0.05); text-decoration: none; display: block; transition: transform 0.3s ease, border-color 0.3s ease;">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
                             <line x1="16" y1="8" x2="2" y2="22"></line>
@@ -572,7 +581,7 @@
             <div class="features-grid reveal reveal-stagger">
                 <div class="feature-card">
                     <div class="icon-glass icon-cyan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"></circle>
                             <path
@@ -589,7 +598,7 @@
                 </div>
                 <div class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
@@ -602,7 +611,7 @@
                 </div>
                 <div class="feature-card">
                     <div class="icon-glass icon-purple">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
                             <rect x="9" y="9" width="6" height="6"></rect>
@@ -624,7 +633,7 @@
                 </div>
                 <div class="feature-card">
                     <div class="icon-glass icon-pink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
                             </path>
@@ -653,7 +662,7 @@
                 <!-- Card 1: Technical Expectations -->
                 <div class="feature-card" style="background: rgba(16, 11, 32, 0.6);">
                     <div class="icon-glass icon-pink" style="width: 40px; height: 40px; margin-bottom: 15px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14 2 14 8 20 8"></polyline>
@@ -672,7 +681,7 @@
                 <!-- Card 2: Use Considerations -->
                 <div class="feature-card" style="background: rgba(16, 11, 32, 0.6);">
                     <div class="icon-glass icon-cyan" style="width: 40px; height: 40px; margin-bottom: 15px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -690,7 +699,7 @@
                 <!-- Card 3: Accessories -->
                 <div class="feature-card" style="background: rgba(16, 11, 32, 0.6);">
                     <div class="icon-glass icon-purple" style="width: 40px; height: 40px; margin-bottom: 15px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
@@ -735,16 +744,14 @@
     </footer>
 
     <!-- Modal for Remote Camera System Overview -->
-    <div id="featureModal" class="modal">
+    <div id="featureModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="featureModalTitle">
         <div class="modal-content">
-            <span class="close-btn" id="closeFeatureModalBtn">&times;</span>
+            <button type="button" class="close-btn" id="closeFeatureModalBtn" aria-label="Close feature overview modal">&times;</button>
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <img src="https://via.placeholder.com/60" alt="Logo" class="modal-logo" style="display:none;">
-                <!-- Placeholder for actual logo if needed -->
                 <div class="modal-header-text">
-                    <h1 class="modal-main-title">Remote Camera System</h1>
+                    <h2 class="modal-main-title" id="featureModalTitle">Remote Camera System</h2>
                     <p class="modal-subtitle">Turn any Android device into a secure security camera.</p>
                 </div>
             </div>
@@ -789,7 +796,7 @@
             <div class="modal-features-grid">
                 <div class="m-feature">
                     <span class="m-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -804,7 +811,7 @@
                 </div>
                 <div class="m-feature">
                     <span class="m-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
                             <line x1="7" y1="2" x2="7" y2="22"></line>
@@ -823,7 +830,7 @@
                 </div>
                 <div class="m-feature">
                     <span class="m-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
                             </path>
@@ -837,7 +844,7 @@
                 </div>
                 <div class="m-feature">
                     <span class="m-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -867,11 +874,11 @@
     </div>
 
     <!-- Modal for Multi-Device Ecosystem -->
-    <div id="ecosystemModal" class="modal">
+    <div id="ecosystemModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="ecosystemModalTitle">
         <div class="modal-content">
-            <span class="close-btn" id="closeEcosystemModalBtn">&times;</span>
+            <button type="button" class="close-btn" id="closeEcosystemModalBtn" aria-label="Close multi-device ecosystem modal">&times;</button>
             <div class="modal-header">
-                <h1 class="modal-main-title">Multi-Device Ecosystem</h1>
+                <h2 class="modal-main-title" id="ecosystemModalTitle">Multi-Device Ecosystem</h2>
                 <p class="modal-subtitle">Flexible monitoring solutions for every screen.</p>
             </div>
 

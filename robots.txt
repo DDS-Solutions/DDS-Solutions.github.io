@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /use-case-template.html
+
 Sitemap: https://dds-solutions.github.io/sitemap.xml

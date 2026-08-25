@@ -1,39 +1,57 @@
+// Modal Management
+let lastFocusedElement = null;
 
-// Modal Logic
-function openModal() {
-    const modal = document.getElementById('featureModal');
-    if (modal) {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent scroll
+function getFocusableElements(container) {
+    if (!container) return [];
+    return Array.from(container.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+}
+
+function openModal(modalId) {
+    const targetId = typeof modalId === 'string' ? modalId : 'featureModal';
+    const modal = document.getElementById(targetId);
+    if (!modal) return;
+
+    lastFocusedElement = document.activeElement;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Focus the close button or first focusable element
+    const focusables = getFocusableElements(modal);
+    if (focusables.length > 0) {
+        focusables[0].focus();
     }
 }
 
-function closeModal() {
-    const modal = document.getElementById('featureModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Restore scroll
+function closeModal(modalId) {
+    const modals = modalId ? [document.getElementById(modalId)] : document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (modal && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+        }
+    });
+
+    const anyOpen = Array.from(document.querySelectorAll('.modal')).some(m => m.style.display === 'flex');
+    if (!anyOpen) {
+        document.body.style.overflow = 'auto';
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
+            lastFocusedElement = null;
+        }
     }
 }
 
 function openEcosystemModal() {
-    const modal = document.getElementById('ecosystemModal');
-    if (modal) {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
+    openModal('ecosystemModal');
 }
 
 function closeEcosystemModal() {
-    const modal = document.getElementById('ecosystemModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    closeModal('ecosystemModal');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Modal Event Listeners
+    // Wire Modal Open Buttons
     const openEcosystemBtn = document.getElementById('openEcosystemModalBtn');
     if (openEcosystemBtn) {
         openEcosystemBtn.addEventListener('click', function (e) {
@@ -42,29 +60,78 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    const openFeatureBtn = document.getElementById('openFeatureModalBtn');
+    if (openFeatureBtn) {
+        openFeatureBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal('featureModal');
+        });
+    }
+
+    // Generic data-modal-target buttons
+    document.querySelectorAll('[data-modal-target]').forEach(trigger => {
+        trigger.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = trigger.getAttribute('data-modal-target');
+            if (targetId) openModal(targetId);
+        });
+    });
+
+    // Modal Close Buttons
     const closeFeatureBtn = document.getElementById('closeFeatureModalBtn');
     if (closeFeatureBtn) {
-        closeFeatureBtn.addEventListener('click', closeModal);
+        closeFeatureBtn.addEventListener('click', () => closeModal('featureModal'));
     }
 
     const closeEcosystemBtn = document.getElementById('closeEcosystemModalBtn');
     if (closeEcosystemBtn) {
-        closeEcosystemBtn.addEventListener('click', closeEcosystemModal);
+        closeEcosystemBtn.addEventListener('click', () => closeModal('ecosystemModal'));
     }
 
-    // Close on outside click
+    document.querySelectorAll('.modal .close-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const parentModal = btn.closest('.modal');
+            if (parentModal) closeModal(parentModal.id);
+        });
+    });
+
+    // Close on outside backdrop click
     window.addEventListener('click', function (event) {
-        const featureModal = document.getElementById('featureModal');
-        const ecosystemModal = document.getElementById('ecosystemModal');
-        if (featureModal && event.target === featureModal) {
-            closeModal();
+        if (event.target && event.target.classList && event.target.classList.contains('modal')) {
+            closeModal(event.target.id);
         }
-        if (ecosystemModal && event.target === ecosystemModal) {
-            closeEcosystemModal();
+    });
+
+    // Modal Keyboard Trap & Escape handling
+    document.addEventListener('keydown', function (e) {
+        const activeModal = Array.from(document.querySelectorAll('.modal')).find(m => m.style.display === 'flex');
+
+        if (e.key === 'Escape' && activeModal) {
+            closeModal(activeModal.id);
+            return;
+        }
+
+        if (e.key === 'Tab' && activeModal) {
+            const focusables = getFocusableElements(activeModal);
+            if (focusables.length === 0) {
+                e.preventDefault();
+                return;
+            }
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
         }
     });
 
     // Screenshot Carousel Logic
+    const carouselWrapper = document.querySelector('.carousel-wrapper') || document.getElementById('carouselTrack')?.parentElement;
     const track = document.getElementById('carouselTrack');
     const dotsContainer = document.getElementById('carouselDots');
     const slides = track ? track.querySelectorAll('.carousel-slide') : [];
@@ -72,16 +139,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextBtn = document.querySelector('.carousel-nav.next');
 
     if (track && slides.length > 0) {
-        // Create dot indicators
-        slides.forEach((_, index) => {
-            const dot = document.createElement('button');
-            dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-            dot.addEventListener('click', () => scrollToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
+        // Create dot indicators if dotsContainer exists
+        if (dotsContainer) {
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                dot.addEventListener('click', () => scrollToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+        }
 
-        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        const dots = dotsContainer ? dotsContainer.querySelectorAll('.carousel-dot') : [];
 
         // Scroll to specific slide
         function scrollToSlide(index) {
@@ -94,8 +165,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Update active dot on scroll
+        // Update active dot on scroll with rAF throttle
+        let isScrolling = false;
         function updateActiveDot() {
+            if (dots.length === 0) return;
             const trackCenter = track.scrollLeft + track.clientWidth / 2;
             let closestIndex = 0;
             let closestDistance = Infinity;
@@ -112,11 +185,17 @@ document.addEventListener('DOMContentLoaded', function () {
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === closestIndex);
             });
+            isScrolling = false;
         }
 
-        track.addEventListener('scroll', updateActiveDot);
+        track.addEventListener('scroll', function () {
+            if (!isScrolling) {
+                window.requestAnimationFrame(updateActiveDot);
+                isScrolling = true;
+            }
+        }, { passive: true });
 
-        // Arrow navigation
+        // Arrow button navigation
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 track.scrollBy({ left: -300, behavior: 'smooth' });
@@ -129,33 +208,34 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // Keyboard navigation for carousel
+        // Keyboard navigation scoped to carousel focus / hover
+        const isCarouselFocusedOrHovered = () => {
+            if (!carouselWrapper && !track) return false;
+            const active = document.activeElement;
+            const hasFocus = (track && track.contains(active)) ||
+                (carouselWrapper && carouselWrapper.contains(active)) ||
+                (dotsContainer && dotsContainer.contains(active));
+            const isHovered = (carouselWrapper && carouselWrapper.matches(':hover')) ||
+                (track && track.matches(':hover'));
+            return hasFocus || isHovered;
+        };
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
+            if (e.key === 'ArrowLeft' && isCarouselFocusedOrHovered()) {
                 track.scrollBy({ left: -300, behavior: 'smooth' });
-            } else if (e.key === 'ArrowRight') {
+            } else if (e.key === 'ArrowRight' && isCarouselFocusedOrHovered()) {
                 track.scrollBy({ left: 300, behavior: 'smooth' });
             }
         });
     }
 
-    // ESC key to close active modals
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeModal();
-            closeEcosystemModal();
-        }
-    });
-
     // Scroll Reveal Animation (IntersectionObserver)
     const revealElements = document.querySelectorAll('.reveal');
 
     if (revealElements.length > 0) {
-        // Check if user prefers reduced motion
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (prefersReducedMotion) {
-            // Show all elements immediately without animation
             revealElements.forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'none';
@@ -165,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target); // Only animate once
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
@@ -178,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Initialize Medium Zoom
-    // Check if mediumZoom is loaded
     if (typeof mediumZoom === 'function') {
         mediumZoom('.carousel-slide img:not(.no-zoom)', {
             margin: 0,
