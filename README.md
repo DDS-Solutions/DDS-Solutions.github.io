@@ -83,3 +83,9 @@ To update the verification fingerprint:
 1. Obtain your SHA-256 App Signing Certificate Fingerprint from the **Google Play Console** (`Release > Setup > App Integrity > App Signing`).
 2. Update `.well-known/assetlinks.json` with the SHA-256 fingerprint array.
 3. Commit and push to `main`.
+
+---
+
+## 📄 License
+
+Copyright &copy; 2026 DDS Solutions. All rights reserved. See [LICENSE](LICENSE) for details.
