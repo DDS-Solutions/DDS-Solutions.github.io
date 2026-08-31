@@ -1,5 +1,6 @@
 // Modal Management
 let lastFocusedElement = null;
+let previousBodyOverflowY = '';
 
 function getFocusableElements(container) {
     if (!container) return [];
@@ -14,8 +15,14 @@ function openModal(modalId) {
     if (!modal) return;
 
     lastFocusedElement = document.activeElement;
+    const anyOpen = Array.from(document.querySelectorAll('.modal')).some(m => m.style.display === 'flex');
+    if (!anyOpen) {
+        previousBodyOverflowY = document.body.style.overflowY;
+        document.body.style.overflowY = 'hidden';
+    }
     modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    modal.setAttribute('aria-hidden', 'false');
+    modal.scrollTop = 0;
 
     // Focus the close button or first focusable element
     const focusables = getFocusableElements(modal);
@@ -29,12 +36,18 @@ function closeModal(modalId) {
     modals.forEach(modal => {
         if (modal && modal.style.display === 'flex') {
             modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
         }
     });
 
     const anyOpen = Array.from(document.querySelectorAll('.modal')).some(m => m.style.display === 'flex');
     if (!anyOpen) {
-        document.body.style.overflow = 'auto';
+        if (previousBodyOverflowY) {
+            document.body.style.overflowY = previousBodyOverflowY;
+        } else {
+            document.body.style.removeProperty('overflow-y');
+        }
+        previousBodyOverflowY = '';
         if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
             lastFocusedElement.focus();
             lastFocusedElement = null;
@@ -120,7 +133,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const first = focusables[0];
             const last = focusables[focusables.length - 1];
 
-            if (e.shiftKey && document.activeElement === first) {
+            if (!activeModal.contains(document.activeElement)) {
+                e.preventDefault();
+                (e.shiftKey ? last : first).focus();
+            } else if (e.shiftKey && document.activeElement === first) {
                 e.preventDefault();
                 last.focus();
             } else if (!e.shiftKey && document.activeElement === last) {
@@ -143,10 +159,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (dotsContainer) {
             dotsContainer.innerHTML = '';
             slides.forEach((_, index) => {
+                const slide = slides[index];
+                slide.setAttribute('role', 'group');
+                slide.setAttribute('aria-roledescription', 'slide');
+                slide.setAttribute('aria-label', `${index + 1} of ${slides.length}`);
                 const dot = document.createElement('button');
                 dot.type = 'button';
                 dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
                 dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                if (index === 0) dot.setAttribute('aria-current', 'true');
                 dot.addEventListener('click', () => scrollToSlide(index));
                 dotsContainer.appendChild(dot);
             });
@@ -183,7 +204,13 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === closestIndex);
+                const isActive = index === closestIndex;
+                dot.classList.toggle('active', isActive);
+                if (isActive) {
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.removeAttribute('aria-current');
+                }
             });
             isScrolling = false;
         }
@@ -222,8 +249,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft' && isCarouselFocusedOrHovered()) {
+                e.preventDefault();
                 track.scrollBy({ left: -300, behavior: 'smooth' });
             } else if (e.key === 'ArrowRight' && isCarouselFocusedOrHovered()) {
+                e.preventDefault();
                 track.scrollBy({ left: 300, behavior: 'smooth' });
             }
         });

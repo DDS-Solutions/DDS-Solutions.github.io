@@ -71,6 +71,8 @@
 
 <body>
 
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <main id="main-content">
     <!-- Hero Section -->
     <header>
         <div class="container hero-content">
@@ -222,9 +224,9 @@
             <p class="section-subtitle reveal">Swipe through screenshots to explore the features</p>
 
             <div class="carousel-wrapper">
-                <button class="carousel-nav prev" aria-label="Previous slide">&#10094;</button>
+                <button type="button" class="carousel-nav prev" aria-label="Previous slide">&#10094;</button>
 
-                <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-track" id="carouselTrack" role="region" aria-label="Application screenshots" tabindex="0">
                     <!-- Slide: App Start Up Screen -->
                     <div class="carousel-slide">
                         <img src="images/screenshots/app-startup.png" alt="App Start Up Screen" loading="lazy">
@@ -378,7 +380,7 @@
                     </div>
                 </div>
 
-                <button class="carousel-nav next" aria-label="Next slide">&#10095;</button>
+                <button type="button" class="carousel-nav next" aria-label="Next slide">&#10095;</button>
             </div>
 
             <!-- Dot Indicators -->
@@ -715,6 +717,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -735,7 +739,7 @@
     </footer>
 
     <!-- Modal for Remote Camera System Overview -->
-    <div id="featureModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="featureModalTitle">
+    <div id="featureModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="featureModalTitle">
         <div class="modal-content">
             <button type="button" class="close-btn" id="closeFeatureModalBtn" aria-label="Close feature overview modal">&times;</button>
 
@@ -865,7 +869,7 @@
     </div>
 
     <!-- Modal for Multi-Device Ecosystem -->
-    <div id="ecosystemModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="ecosystemModalTitle">
+    <div id="ecosystemModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="ecosystemModalTitle">
         <div class="modal-content">
             <button type="button" class="close-btn" id="closeEcosystemModalBtn" aria-label="Close multi-device ecosystem modal">&times;</button>
             <div class="modal-header">
@@ -896,7 +900,7 @@
                             <li><strong>Unlimited Clones:</strong> Install the full application on other Android 13+
                                 phones.</li>
                             <li><strong>Full Control:</strong> Every cloned app can act as a Camera or a Monitor.</li>
-                            <li><strong>100% Free:</strong> No extra costs for additional devices.</li>
+                        <li><strong>No Extra Device Fees:</strong> Install on additional compatible devices without another purchase.</li>
                         </ul>
                     </div>
                 </div>

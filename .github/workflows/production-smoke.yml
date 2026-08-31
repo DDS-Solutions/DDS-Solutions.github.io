@@ -1,0 +1,29 @@
+name: Production Site Smoke Test
+
+on:
+  page_build:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-site-smoke
+  cancel-in-progress: true
+
+jobs:
+  verify-production:
+    name: Verify Deployed GitHub Pages Site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Set up Python
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        with:
+          python-version: '3.11'
+
+      - name: Verify Production Site
+        run: python scripts/check_deployed_site.py

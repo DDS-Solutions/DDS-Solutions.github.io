@@ -18,6 +18,7 @@ This repository hosts the static site deployed to GitHub Pages at [https://dds-s
 │       └── ci.yml               # Automated CI auditor & integrity tests
 ├── .well-known/
 │   └── assetlinks.json          # Android App Links domain verification
+├── .nojekyll                     # Publish .well-known unchanged on GitHub Pages
 ├── css/
 │   └── style.css                # Site-wide responsive stylesheet
 ├── fonts/                       # Self-hosted subsetted Inter font files (.woff2)
@@ -65,13 +66,31 @@ To run the site auditor and integrity check locally:
 python scripts/validate_site.py
 ```
 
+Until the production Play app-signing fingerprint replaces the documented placeholder, use the temporary local-only mode to verify every other rule:
+
+```bash
+python scripts/validate_site.py --allow-placeholder-fingerprint
+```
+
+The default command remains intentionally strict and fails on a placeholder fingerprint.
+
+To run JavaScript syntax checks, validator regression tests, and the browser smoke suite:
+
+```bash
+npm ci
+npm test
+```
+
 The validator checks:
 - Content Security Policy (CSP) tag presence and policy validity.
 - Subresource Integrity (SRI) for external scripts and stylesheets.
 - Existence of all local asset paths (`<img>`, `<script>`, `<link>`) and internal links (`<a>`).
 - JSON-LD syntax validation in `<script type="application/ld+json">`.
 - Digital Asset Links (`.well-known/assetlinks.json`) format.
+- GitHub Pages publishing configuration for the `.well-known` directory.
+- Exactly one main-content landmark per HTML page.
 - Disallow / noindex rules for draft or template pages.
+- Sitemap XML structure, duplicates, missing public pages, and unexpected URLs.
 
 ---
 

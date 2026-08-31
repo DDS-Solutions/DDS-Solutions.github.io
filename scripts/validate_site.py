@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import argparse
+from collections import Counter
 import json
 import os
 import re
 import sys
+import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
@@ -11,6 +13,10 @@ from urllib.parse import urlparse
 # Global error / warning collectors
 errors = []
 warnings = []
+
+EXPECTED_PACKAGE_NAME = "com.ddssolutions.remotecamera"
+EXPECTED_SITE_ORIGIN = "https://dds-solutions.github.io"
+FINGERPRINT_PATTERN = re.compile(r"(?:[0-9A-F]{2}:){31}[0-9A-F]{2}")
 
 def log_error(file_path, line_num, message):
     error_str = f"[FAIL] {file_path}:{line_num} - {message}"
@@ -30,6 +36,7 @@ class SiteHTMLParser(HTMLParser):
         self.has_csp = False
         self.csp_content = ""
         self.has_noindex = False
+        self.main_count = 0
         self.current_tag = None
         self.current_attrs = {}
         self.in_script = False
@@ -57,6 +64,9 @@ class SiteHTMLParser(HTMLParser):
                 content_val = (attr_dict.get('content') or '').lower()
                 if 'noindex' in content_val:
                     self.has_noindex = True
+
+        if tag.lower() == 'main':
+            self.main_count += 1
 
         # Check inline event handlers (e.g., onclick, onload)
         for attr_name, attr_val in attrs:
@@ -145,6 +155,10 @@ def validate_html_file(file_path, root_dir):
         for match in set(http_matches):
             log_error(rel_path, 1, f"Insecure 'http://' URL found: {match}")
 
+    # Each page must expose exactly one primary-content landmark.
+    if parser.main_count != 1:
+        log_error(rel_path, 1, f"Expected exactly one <main> landmark, found {parser.main_count}")
+
     # 3. Asset Existence Check
     for attr, target, line_num in parser.assets_to_check:
         if target.startswith('http://') or target.startswith('https://') or target.startswith('data:'):
@@ -178,7 +192,7 @@ def validate_html_file(file_path, root_dir):
         if not parser.has_noindex:
             log_error(rel_path, 1, "Template 'use-case-template.html' is missing '<meta name=\"robots\" content=\"noindex\">'")
 
-def validate_assetlinks(root_dir):
+def validate_assetlinks(root_dir, allow_placeholder_fingerprint=False):
     assetlinks_path = root_dir / '.well-known' / 'assetlinks.json'
     if not assetlinks_path.exists():
         log_error(".well-known/assetlinks.json", 1, "Missing .well-known/assetlinks.json file")
@@ -186,35 +200,137 @@ def validate_assetlinks(root_dir):
 
     try:
         data = json.loads(assetlinks_path.read_text(encoding='utf-8'))
-        for entry in data:
-            target = entry.get('target', {})
-            fingerprints = target.get('sha256_cert_fingerprints', [])
+        if not isinstance(data, list) or not data:
+            log_error(".well-known/assetlinks.json", 1, "Root value must be a non-empty JSON array")
+            return
+
+        expected_statement_found = False
+        for index, entry in enumerate(data, start=1):
+            if not isinstance(entry, dict):
+                log_error(".well-known/assetlinks.json", 1, f"Statement {index} must be a JSON object")
+                continue
+
+            relation = entry.get('relation')
+            if not isinstance(relation, list) or 'delegate_permission/common.handle_all_urls' not in relation:
+                log_error(".well-known/assetlinks.json", 1,
+                          f"Statement {index} is missing relation 'delegate_permission/common.handle_all_urls'")
+
+            target = entry.get('target')
+            if not isinstance(target, dict):
+                log_error(".well-known/assetlinks.json", 1, f"Statement {index} is missing a valid target object")
+                continue
+
+            if target.get('namespace') != 'android_app':
+                log_error(".well-known/assetlinks.json", 1,
+                          f"Statement {index} target namespace must be 'android_app'")
+
+            package_name = target.get('package_name')
+            if package_name != EXPECTED_PACKAGE_NAME:
+                log_error(".well-known/assetlinks.json", 1,
+                          f"Statement {index} package_name must be '{EXPECTED_PACKAGE_NAME}', found '{package_name}'")
+            else:
+                expected_statement_found = True
+
+            fingerprints = target.get('sha256_cert_fingerprints')
+            if not isinstance(fingerprints, list) or not fingerprints:
+                log_error(".well-known/assetlinks.json", 1,
+                          f"Statement {index} must contain at least one SHA-256 certificate fingerprint")
+                continue
+
             for fp in fingerprints:
+                if not isinstance(fp, str):
+                    log_error(".well-known/assetlinks.json", 1,
+                              f"Statement {index} contains a non-string certificate fingerprint")
+                    continue
                 if 'REPLACE_WITH_REAL_KEY' in fp or fp.startswith('XX:'):
-                    log_warning(".well-known/assetlinks.json", 1, f"Placeholder SHA-256 fingerprint found: '{fp}'. Update with production key from Play Console.")
-    except Exception as e:
+                    message = ("Placeholder SHA-256 fingerprint found. Replace it with the production "
+                               "Play app-signing certificate fingerprint.")
+                    if allow_placeholder_fingerprint:
+                        log_warning(".well-known/assetlinks.json", 1, message)
+                    else:
+                        log_error(".well-known/assetlinks.json", 1, message)
+                    continue
+                if not FINGERPRINT_PATTERN.fullmatch(fp):
+                    log_error(".well-known/assetlinks.json", 1,
+                              f"Statement {index} contains a malformed SHA-256 certificate fingerprint")
+
+        if not expected_statement_found:
+            log_error(".well-known/assetlinks.json", 1,
+                      f"No statement found for expected package '{EXPECTED_PACKAGE_NAME}'")
+    except (OSError, json.JSONDecodeError) as e:
         log_error(".well-known/assetlinks.json", 1, f"Invalid assetlinks.json format: {e}")
+
+def validate_github_pages_config(root_dir):
+    if not (root_dir / '.nojekyll').exists():
+        log_error('.nojekyll', 1,
+                  "Missing .nojekyll file; GitHub Pages will exclude the .well-known directory")
 
 def validate_robots_and_sitemap(root_dir):
     robots_path = root_dir / 'robots.txt'
-    if robots_path.exists():
+    if not robots_path.exists():
+        log_error("robots.txt", 1, "Missing robots.txt file")
+    else:
         robots_text = robots_path.read_text(encoding='utf-8')
         if 'Disallow: /use-case-template.html' not in robots_text:
             log_error("robots.txt", 1, "Missing 'Disallow: /use-case-template.html' rule")
+        expected_sitemap_line = f"Sitemap: {EXPECTED_SITE_ORIGIN}/sitemap.xml"
+        if expected_sitemap_line not in robots_text:
+            log_error("robots.txt", 1, f"Missing canonical sitemap declaration '{expected_sitemap_line}'")
 
     sitemap_path = root_dir / 'sitemap.xml'
-    if sitemap_path.exists():
-        sitemap_text = sitemap_path.read_text(encoding='utf-8')
-        if 'https://dds-solutions.github.io/index.html' in sitemap_text:
-            log_error("sitemap.xml", 1, "Duplicate entry 'https://dds-solutions.github.io/index.html' in sitemap.xml. Use canonical root '/' only.")
+    if not sitemap_path.exists():
+        log_error("sitemap.xml", 1, "Missing sitemap.xml file")
+        return
+
+    try:
+        sitemap_root = ET.parse(sitemap_path).getroot()
+    except (OSError, ET.ParseError) as e:
+        log_error("sitemap.xml", 1, f"Invalid sitemap XML: {e}")
+        return
+
+    if sitemap_root.tag.split('}')[-1] != 'urlset':
+        log_error("sitemap.xml", 1, "Root element must be <urlset>")
+        return
+
+    locations = []
+    for element in sitemap_root.iter():
+        if element.tag.split('}')[-1] == 'loc' and element.text:
+            locations.append(element.text.strip())
+
+    duplicate_locations = [url for url, count in Counter(locations).items() if count > 1]
+    for url in duplicate_locations:
+        log_error("sitemap.xml", 1, f"Duplicate sitemap URL: '{url}'")
+
+    html_files = [path for path in root_dir.glob('*.html')
+                  if not path.name.startswith('google') and path.name != 'use-case-template.html']
+    expected_locations = {
+        f"{EXPECTED_SITE_ORIGIN}/" if path.name == 'index.html'
+        else f"{EXPECTED_SITE_ORIGIN}/{path.name}"
+        for path in html_files
+    }
+    actual_locations = set(locations)
+
+    for url in sorted(expected_locations - actual_locations):
+        log_error("sitemap.xml", 1, f"Missing public page from sitemap: '{url}'")
+    for url in sorted(actual_locations - expected_locations):
+        log_error("sitemap.xml", 1, f"Unexpected sitemap URL: '{url}'")
+
+    if f"{EXPECTED_SITE_ORIGIN}/index.html" in actual_locations:
+        log_error("sitemap.xml", 1, "Use the canonical site root '/' instead of '/index.html'")
+    if f"{EXPECTED_SITE_ORIGIN}/use-case-template.html" in actual_locations:
+        log_error("sitemap.xml", 1, "Template page must not appear in sitemap.xml")
 
 def main():
     parser = argparse.ArgumentParser(description="Site integrity, security, and CSP auditor.")
     parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parent.parent,
                         help="Root directory of the static site")
+    parser.add_argument('--allow-placeholder-fingerprint', action='store_true',
+                        help="Temporarily downgrade the known signing fingerprint placeholder to a warning")
     args = parser.parse_args()
 
     root_dir = args.root.resolve()
+    errors.clear()
+    warnings.clear()
     log_info(f"Starting site validation in root directory: {root_dir}")
 
     html_files = [f for f in sorted(list(root_dir.glob('*.html'))) if not f.name.startswith('google')]
@@ -223,7 +339,8 @@ def main():
     for html_file in html_files:
         validate_html_file(html_file, root_dir)
 
-    validate_assetlinks(root_dir)
+    validate_github_pages_config(root_dir)
+    validate_assetlinks(root_dir, allow_placeholder_fingerprint=args.allow_placeholder_fingerprint)
     validate_robots_and_sitemap(root_dir)
 
     print("\n--- Audit Summary ---")
@@ -237,8 +354,11 @@ def main():
         for err in errors:
             print(f"  - {err}")
         sys.exit(1)
+    elif warnings:
+        print(f"\nSUCCESS WITH WARNINGS: Validation passed across {len(html_files)} pages with {len(warnings)} warning(s).")
+        sys.exit(0)
     else:
-        print(f"\nSUCCESS: 100% of validation and security checks passed cleanly across {len(html_files)} pages!")
+        print(f"\nSUCCESS: All validation and security checks passed cleanly across {len(html_files)} pages!")
         sys.exit(0)
 
 if __name__ == '__main__':

@@ -27,5 +27,39 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Run Validator Regression Tests
+        run: python -m unittest discover -s scripts/tests -v
+
       - name: Run Site Audit & Validation Suite
         run: python scripts/validate_site.py
+
+  browser-smoke:
+    name: JavaScript & Browser Smoke Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Set up Python
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install Test Dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Check JavaScript Syntax
+        run: npm run check:js
+
+      - name: Run Browser Smoke Tests
+        run: npm run test:browser

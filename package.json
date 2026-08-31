@@ -1,0 +1,16 @@
+{
+  "name": "dds-solutions-github-io",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Validation and browser smoke tests for the Pro Wifi Camera Remote website.",
+  "scripts": {
+    "check:js": "node --check js/app.js && node --check playwright.config.js && node --check tests/site.spec.js",
+    "test:unit": "python -m unittest discover -s scripts/tests -v",
+    "test:audit:pending-fingerprint": "python scripts/validate_site.py --allow-placeholder-fingerprint",
+    "test:browser": "playwright test",
+    "test": "npm run check:js && npm run test:unit && npm run test:browser"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}
