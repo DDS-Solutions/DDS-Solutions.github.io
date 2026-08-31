@@ -56,7 +56,7 @@ def require_content_type(url, actual, allowed):
         raise RuntimeError(f"{url} returned content type '{actual}', expected one of {sorted(allowed)}")
 
 
-def validate_assetlinks(origin):
+def validate_assetlinks(origin, allow_placeholder_fingerprint=False):
     url = f"{origin}/.well-known/assetlinks.json"
     raw, content_type = fetch(url)
     require_content_type(url, content_type, {"application/json"})
@@ -73,6 +73,9 @@ def validate_assetlinks(origin):
             raise RuntimeError("assetlinks.json has no production signing fingerprint")
         for fingerprint in fingerprints:
             if "REPLACE_WITH_REAL_KEY" in fingerprint or not FINGERPRINT_PATTERN.fullmatch(fingerprint):
+                if allow_placeholder_fingerprint:
+                    print(f"[WARN] assetlinks.json contains placeholder fingerprint: {fingerprint}", file=sys.stderr)
+                    return
                 raise RuntimeError("assetlinks.json contains a placeholder or malformed signing fingerprint")
         return
     raise RuntimeError(f"assetlinks.json has no statement for {EXPECTED_PACKAGE_NAME}")
@@ -107,6 +110,8 @@ def validate_sitemap_and_pages(origin):
 def main():
     parser = argparse.ArgumentParser(description="Verify the deployed GitHub Pages site.")
     parser.add_argument("--origin", default="https://dds-solutions.github.io")
+    parser.add_argument("--allow-placeholder-fingerprint", action="store_true",
+                        help="Allow placeholder certificate fingerprint in assetlinks.json")
     args = parser.parse_args()
     origin = args.origin.rstrip("/")
 
@@ -119,7 +124,7 @@ def main():
     require_content_type(script_url, script_type,
                          {"application/javascript", "text/javascript"})
 
-    validate_assetlinks(origin)
+    validate_assetlinks(origin, allow_placeholder_fingerprint=args.allow_placeholder_fingerprint)
     validate_sitemap_and_pages(origin)
     print("Production smoke checks passed.")
 

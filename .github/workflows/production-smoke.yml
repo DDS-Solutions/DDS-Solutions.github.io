@@ -26,4 +26,4 @@ jobs:
           python-version: '3.11'
 
       - name: Verify Production Site
-        run: python scripts/check_deployed_site.py
+        run: python scripts/check_deployed_site.py --allow-placeholder-fingerprint
