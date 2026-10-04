@@ -2,13 +2,11 @@
 import argparse
 from collections import Counter
 import json
-import os
 import re
 import sys
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlparse
 
 # Global error / warning collectors
 errors = []
@@ -17,6 +15,7 @@ warnings = []
 EXPECTED_PACKAGE_NAME = "com.ddssolutions.remotecamera"
 EXPECTED_SITE_ORIGIN = "https://dds-solutions.github.io"
 FINGERPRINT_PATTERN = re.compile(r"(?:[0-9A-F]{2}:){31}[0-9A-F]{2}")
+NON_INDEXED_PAGES = {'use-case-template.html', '404.html'}
 
 def log_error(file_path, line_num, message):
     error_str = f"[FAIL] {file_path}:{line_num} - {message}"
@@ -68,13 +67,11 @@ class SiteHTMLParser(HTMLParser):
         if tag.lower() == 'main':
             self.main_count += 1
 
-        # Check inline event handlers (e.g., onclick, onload)
+        # Single-pass check for inline event handlers and javascript: URIs
         for attr_name, attr_val in attrs:
-            if attr_name.lower().startswith('on'):
+            attr_name_lower = attr_name.lower()
+            if attr_name_lower.startswith('on'):
                 log_error(self.file_path, line_num, f"Forbidden inline event handler found: '{attr_name}=\"{attr_val}\"'")
-
-        # Check javascript: URIs
-        for attr_name, attr_val in attrs:
             if attr_val and attr_val.strip().lower().startswith('javascript:'):
                 log_error(self.file_path, line_num, f"Forbidden 'javascript:' URI found in attribute '{attr_name}'")
 
@@ -131,6 +128,14 @@ class SiteHTMLParser(HTMLParser):
                     # Executable inline script found
                     log_error(self.file_path, self.script_line, "Forbidden executable inline <script> block found")
 
+def parse_csp(csp_str):
+    directives = {}
+    for part in csp_str.split(';'):
+        tokens = part.strip().split()
+        if tokens:
+            directives[tokens[0].lower()] = tokens[1:]
+    return directives
+
 def validate_html_file(file_path, root_dir):
     rel_path = file_path.relative_to(root_dir)
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -143,11 +148,14 @@ def validate_html_file(file_path, root_dir):
     if not parser.has_csp:
         log_error(rel_path, 1, "Missing <meta http-equiv=\"Content-Security-Policy\"> tag")
     else:
-        csp = parser.csp_content
-        if "'unsafe-inline'" in (csp.split('script-src')[1].split(';')[0] if 'script-src' in csp else ""):
+        directives = parse_csp(parser.csp_content)
+        script_src = directives.get('script-src', [])
+        if "'unsafe-inline'" in script_src:
             log_error(rel_path, 1, "CSP 'script-src' contains unsafe-inline")
-        if "fonts.googleapis.com" in csp or "fonts.gstatic.com" in csp:
-            log_error(rel_path, 1, "CSP contains legacy Google Fonts domain rules")
+        for tokens in directives.values():
+            for token in tokens:
+                if "fonts.googleapis.com" in token or "fonts.gstatic.com" in token:
+                    log_error(rel_path, 1, "CSP contains legacy Google Fonts domain rules")
 
     # 2. Insecure http:// Protocol Audit (ignoring standard XML schemas)
     http_matches = re.findall(r'http://(?!www\.w3\.org|schema\.org)[^\s"\'<>]+', content)
@@ -187,10 +195,10 @@ def validate_html_file(file_path, root_dir):
         if not link_path.exists():
             log_error(rel_path, line_num, f"Referenced local link target does not exist: '{href}'")
 
-    # 5. Template file indexing audit
-    if file_path.name == 'use-case-template.html':
+    # 5. Non-indexed page audit
+    if file_path.name in NON_INDEXED_PAGES:
         if not parser.has_noindex:
-            log_error(rel_path, 1, "Template 'use-case-template.html' is missing '<meta name=\"robots\" content=\"noindex\">'")
+            log_error(rel_path, 1, f"Non-indexed page '{file_path.name}' is missing '<meta name=\"robots\" content=\"noindex\">'")
 
 def validate_assetlinks(root_dir, allow_placeholder_fingerprint=False):
     assetlinks_path = root_dir / '.well-known' / 'assetlinks.json'
@@ -302,7 +310,7 @@ def validate_robots_and_sitemap(root_dir):
         log_error("sitemap.xml", 1, f"Duplicate sitemap URL: '{url}'")
 
     html_files = [path for path in root_dir.glob('*.html')
-                  if not path.name.startswith('google') and path.name != 'use-case-template.html']
+                  if not path.name.startswith('google') and path.name not in NON_INDEXED_PAGES]
     expected_locations = {
         f"{EXPECTED_SITE_ORIGIN}/" if path.name == 'index.html'
         else f"{EXPECTED_SITE_ORIGIN}/{path.name}"
@@ -317,8 +325,32 @@ def validate_robots_and_sitemap(root_dir):
 
     if f"{EXPECTED_SITE_ORIGIN}/index.html" in actual_locations:
         log_error("sitemap.xml", 1, "Use the canonical site root '/' instead of '/index.html'")
-    if f"{EXPECTED_SITE_ORIGIN}/use-case-template.html" in actual_locations:
-        log_error("sitemap.xml", 1, "Template page must not appear in sitemap.xml")
+    for page_name in NON_INDEXED_PAGES:
+        if f"{EXPECTED_SITE_ORIGIN}/{page_name}" in actual_locations:
+            log_error("sitemap.xml", 1, f"Non-indexed page '{page_name}' must not appear in sitemap.xml")
+
+def validate_page_reachability(root_dir):
+    public_pages = {
+        path.name for path in root_dir.glob('*.html')
+        if not path.name.startswith('google') and path.name not in NON_INDEXED_PAGES
+    }
+    linked_targets = set()
+    for page_name in public_pages:
+        page_path = root_dir / page_name
+        try:
+            content = page_path.read_text(encoding='utf-8')
+            parser = SiteHTMLParser(page_name)
+            parser.feed(content)
+            for href, _ in parser.links_to_check:
+                clean_href = href.split('?')[0].split('#')[0].strip().lstrip('/')
+                if clean_href in public_pages:
+                    linked_targets.add(clean_href)
+        except OSError as e:
+            log_error(page_name, 1, f"Failed to read page for reachability check: {e}")
+
+    orphaned = public_pages - linked_targets - {'index.html'}
+    for orphan in sorted(orphaned):
+        log_error(orphan, 1, f"Orphaned public page detected: '{orphan}' is not linked from any public page")
 
 def main():
     parser = argparse.ArgumentParser(description="Site integrity, security, and CSP auditor.")
@@ -342,6 +374,7 @@ def main():
     validate_github_pages_config(root_dir)
     validate_assetlinks(root_dir, allow_placeholder_fingerprint=args.allow_placeholder_fingerprint)
     validate_robots_and_sitemap(root_dir)
+    validate_page_reachability(root_dir)
 
     print("\n--- Audit Summary ---")
     if warnings:

@@ -6,7 +6,13 @@ function getFocusableElements(container) {
     if (!container) return [];
     return Array.from(container.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    )).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+    )).filter(el => {
+        if (el.hasAttribute('disabled')) return false;
+        if (typeof el.checkVisibility === 'function') {
+            return el.checkVisibility();
+        }
+        return el.offsetParent !== null || el.getClientRects().length > 0;
+    });
 }
 
 function openModal(modalId) {
@@ -187,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Update active dot on scroll with rAF throttle
-        let isScrolling = false;
         function updateActiveDot() {
             if (dots.length === 0) return;
             const trackCenter = track.scrollLeft + track.clientWidth / 2;
@@ -212,13 +217,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     dot.removeAttribute('aria-current');
                 }
             });
-            isScrolling = false;
         }
 
+        let rafId = null;
         track.addEventListener('scroll', function () {
-            if (!isScrolling) {
-                window.requestAnimationFrame(updateActiveDot);
-                isScrolling = true;
+            if (rafId === null) {
+                rafId = window.requestAnimationFrame(() => {
+                    updateActiveDot();
+                    rafId = null;
+                });
             }
         }, { passive: true });
 

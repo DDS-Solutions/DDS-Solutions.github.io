@@ -122,5 +122,33 @@ class SiteValidatorTests(unittest.TestCase):
         self.assertTrue(any("exactly one <main>" in error for error in validate_site.errors))
 
 
+    def test_malformed_fingerprint_fails_even_with_allow_placeholder(self):
+        self.write_assetlinks("INVALID_CORRUPT_KEY")
+
+        validate_site.validate_assetlinks(self.root, allow_placeholder_fingerprint=True)
+
+        self.assertTrue(any("malformed SHA-256 certificate fingerprint" in error for error in validate_site.errors))
+
+    def test_404_page_is_not_required_in_sitemap(self):
+        (self.root / "index.html").write_text("<!doctype html>", encoding="utf-8")
+        (self.root / "404.html").write_text("<!doctype html>", encoding="utf-8")
+        self.write_robots()
+        self.write_sitemap([f"{validate_site.EXPECTED_SITE_ORIGIN}/"])
+
+        validate_site.validate_robots_and_sitemap(self.root)
+
+        self.assertEqual([], validate_site.errors)
+
+    def test_orphan_page_detection_catches_unlinked_page(self):
+        (self.root / "index.html").write_text('<!doctype html><html><body><a href="page-a.html">A</a></body></html>', encoding="utf-8")
+        (self.root / "page-a.html").write_text('<!doctype html><html><body><a href="index.html">Home</a></body></html>', encoding="utf-8")
+        (self.root / "orphan.html").write_text('<!doctype html><html><body><a href="index.html">Home</a></body></html>', encoding="utf-8")
+
+        validate_site.validate_page_reachability(self.root)
+
+        self.assertTrue(any("Orphaned public page detected: 'orphan.html'" in error for error in validate_site.errors))
+
+
 if __name__ == "__main__":
     unittest.main()
+

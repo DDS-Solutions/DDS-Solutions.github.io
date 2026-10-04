@@ -367,22 +367,16 @@ a.feature-card {
 .icon-lock,
 .icon-cyan {
     color: #4cc9f0;
-    /* Cyan */
-    box-shadow: 0 0 0 rgba(76, 201, 240, 0);
 }
 
 .icon-zap,
 .icon-pink {
     color: #f72585;
-    /* Pink */
-    box-shadow: 0 0 0 rgba(247, 37, 133, 0);
 }
 
 .icon-wifi,
 .icon-purple {
     color: #7b2cbf;
-    /* Purple */
-    box-shadow: 0 0 0 rgba(123, 44, 191, 0);
 }
 
 /* Hover Effects */

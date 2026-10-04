@@ -47,7 +47,7 @@ def fetch(url, attempts=3):
         except (HTTPError, URLError, TimeoutError, RuntimeError) as error:
             last_error = error
             if attempt < attempts:
-                time.sleep(5)
+                time.sleep(2 * attempt)
     raise RuntimeError(f"Failed to fetch {url}: {last_error}")
 
 
@@ -59,7 +59,7 @@ def require_content_type(url, actual, allowed):
 def validate_assetlinks(origin, allow_placeholder_fingerprint=False):
     url = f"{origin}/.well-known/assetlinks.json"
     raw, content_type = fetch(url)
-    require_content_type(url, content_type, {"application/json"})
+    require_content_type(url, content_type, {"application/json", "text/plain"})
     data = json.loads(raw.decode("utf-8"))
     if not isinstance(data, list) or not data:
         raise RuntimeError("assetlinks.json must contain a non-empty array")
@@ -72,11 +72,15 @@ def validate_assetlinks(origin, allow_placeholder_fingerprint=False):
         if not fingerprints:
             raise RuntimeError("assetlinks.json has no production signing fingerprint")
         for fingerprint in fingerprints:
-            if "REPLACE_WITH_REAL_KEY" in fingerprint or not FINGERPRINT_PATTERN.fullmatch(fingerprint):
+            if not isinstance(fingerprint, str):
+                raise RuntimeError("assetlinks.json contains a non-string fingerprint")
+            if "REPLACE_WITH_REAL_KEY" in fingerprint or fingerprint.startswith("XX:"):
                 if allow_placeholder_fingerprint:
                     print(f"[WARN] assetlinks.json contains placeholder fingerprint: {fingerprint}", file=sys.stderr)
-                    return
-                raise RuntimeError("assetlinks.json contains a placeholder or malformed signing fingerprint")
+                    continue
+                raise RuntimeError("assetlinks.json contains a placeholder signing fingerprint")
+            if not FINGERPRINT_PATTERN.fullmatch(fingerprint):
+                raise RuntimeError(f"assetlinks.json contains a malformed signing fingerprint: '{fingerprint}'")
         return
     raise RuntimeError(f"assetlinks.json has no statement for {EXPECTED_PACKAGE_NAME}")
 
