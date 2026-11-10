@@ -27,15 +27,21 @@ This repository hosts the static site deployed to GitHub Pages at [https://dds-s
 ├── js/
 │   └── app.js                   # Accessible modals, carousel & scroll animations
 ├── scripts/
-│   └── validate_site.py         # Custom site integrity, CSP & link validator
+│   ├── validate_site.py         # Custom site integrity, CSP & link validator
+│   └── tests/
+│       └── test_validate_site.py # Unit tests for the site validator
+├── tests/
+│   └── site.spec.js             # Playwright browser smoke & accessibility tests
 ├── sitemap.xml                  # Search engine sitemap
 ├── robots.txt                   # Crawler directives
 ├── index.html                   # Homepage & app landing page
 ├── whats-new.html               # Version changelog & feature highlights
 ├── accessories.html             # Curated hardware & mounting recommendations
+├── alfred-camera-alternative.html # Competitor comparison & migration guide
 ├── privacy.html                 # Privacy policy
-├── terms.html                   # Terms of service
-└── [use-case].html              # Targeted use-case landing pages (Baby, Pet, 3D Printer, etc.)
+├── terms.html                   # User agreement & terms of service
+├── 404.html                     # Custom 404 error page
+└── [use-case].html              # 10 targeted use-case landing pages (Baby, Pet, 3D Printer, RV, Laser/CNC, etc.)
 ```
 
 ---
@@ -84,13 +90,15 @@ npm test
 The validator checks:
 - Content Security Policy (CSP) tag presence and policy validity.
 - Subresource Integrity (SRI) for external scripts and stylesheets.
-- Existence of all local asset paths (`<img>`, `<script>`, `<link>`) and internal links (`<a>`).
+- Existence of all local asset paths (`<img>`, `<script>`, `<link>`), internal links (`<a>`), and in-page `#fragment` anchor targets.
+- Required SEO metadata (`<title>`, `<meta name="description">`, `<link rel="canonical">`) on all public indexed pages.
 - JSON-LD syntax validation in `<script type="application/ld+json">`.
-- Digital Asset Links (`.well-known/assetlinks.json`) format.
+- Digital Asset Links (`.well-known/assetlinks.json`) format and certificate fingerprint validity.
 - GitHub Pages publishing configuration for the `.well-known` directory.
-- Exactly one main-content landmark per HTML page.
-- Disallow / noindex rules for draft or template pages.
-- Sitemap XML structure, duplicates, missing public pages, and unexpected URLs.
+- Exactly one `<main>` landmark per HTML page.
+- Disallow / noindex rules for draft or template pages (`use-case-template.html`, `404.html`).
+- Sitemap XML structure, `<lastmod>` presence, duplicates, missing public pages, and unexpected URLs.
+- Reachability of every public HTML page (zero orphaned pages) and absence of misleading pricing phrases.
 
 ---
 

@@ -29,8 +29,64 @@
     <meta name="keywords"
         content="laser cutter camera, cnc router camera, lightburn camera alternative, workshop monitor camera, diode laser camera, local streaming workshop camera">
     <link rel="canonical" href="https://dds-solutions.github.io/laser-cnc-monitor.html">
-
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data: SoftwareApplication & FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Pro Wifi Camera Remote",
+                "operatingSystem": "Android 12+",
+                "applicationCategory": "UtilitiesApplication",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "1.99",
+                    "priceCurrency": "USD"
+                },
+                "description": "Real-time laser cutter and CNC router monitoring app. Low-latency local Wi-Fi video, browser PC viewing, and remote flashlight control for maker workshops.",
+                "url": "https://dds-solutions.github.io/laser-cnc-monitor.html",
+                "downloadUrl": "https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera",
+                "author": {
+                    "@type": "Organization",
+                    "name": "DDS Solutions"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Can I watch the stream on my PC while running LightBurn or CNC software?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes! Pro Wifi Camera features a built-in browser viewing mode. You can snap a browser window beside your laser or CNC controller (LightBurn, g-code senders, Fusion 360) and keep an eye on machine progress without needing another Android screen."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Why is low latency so important for laser engravers and CNC routers?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Cloud-based security cameras introduce delays of 3 to 10 seconds. When cutting acrylic or wood, a laser flare-up or CNC endmill bind can escalate quickly. Pro Wifi Camera streams directly over your local network with sub-second latency so you can hit the e-stop immediately."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I remotely light up dark machine enclosures?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, you can toggle the phone's LED flashlight directly from the monitor interface or browser viewer, making it easy to check tool clearance and focus inside darkened enclosures."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
 
     <!-- Font Preloads for Performance / LCP -->
     <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
@@ -54,6 +110,20 @@
 <body>
 
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand"><span class="nav-brand-dot" aria-hidden="true"></span>Pro Wifi Camera</a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#use-cases">Use Cases</a>
+                <a href="accessories.html">Accessories</a>
+                <a href="whats-new.html">What's New</a>
+                <a href="alfred-camera-alternative.html">vs Alfred</a>
+                <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
+                    class="nav-cta" target="_blank" rel="noopener noreferrer">Get App ($1.99)</a>
+            </div>
+        </div>
+    </nav>
     <main id="main-content">
         <!-- Breadcrumbs -->
         <div class="container">
@@ -336,6 +406,48 @@
                         <p class="feature-desc">Check on your pets while in another room.</p>
                     </a>
 
+                    <!-- Baby Monitor -->
+                    <a href="baby-monitor.html" class="feature-card">
+                        <div class="icon-glass icon-pink">
+                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Baby Monitoring</h3>
+                        <p class="feature-desc">Secure, offline monitoring for your nursery.</p>
+                    </a>
+
+                    <!-- Front Door Cam -->
+                    <a href="front-door-cam.html" class="feature-card">
+                        <div class="icon-glass icon-purple">
+                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Front Door Cam</h3>
+                        <p class="feature-desc">See who is at the door without expensive subscriptions.</p>
+                    </a>
+
+                    <!-- Wildlife Monitor -->
+                    <a href="wildlife-monitor.html" class="feature-card">
+                        <div class="icon-glass icon-purple">
+                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                                <line x1="16" y1="8" x2="2" y2="22"></line>
+                                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Wildlife Monitor</h3>
+                        <p class="feature-desc">Watch birds at the feeder or wild life in action from a safe distance.</p>
+                    </a>
+
                 </div>
             </div>
         </section>
@@ -347,15 +459,13 @@
         <div class="container">
             <div style="text-align: center; margin-bottom: 20px;">
                 <p>&copy; 2026 DDS Solutions. All rights reserved.</p>
-                <div style="margin-top: 10px;">
-                    <a href="index.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Home</a> |
-                    <a href="whats-new.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">What's New</a> |
-                    <a href="privacy.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
-                    <a href="terms.html" style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">User
-                        Agreement</a>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="whats-new.html">What's New</a>
+                    <a href="accessories.html">Accessories</a>
+                    <a href="alfred-camera-alternative.html">Alfred Camera Alternative</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">User Agreement</a>
                 </div>
             </div>
         </div>

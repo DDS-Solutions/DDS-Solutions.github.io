@@ -5,6 +5,7 @@ const PUBLIC_PAGES = [
     '/3d-printer-monitor.html',
     '/accessories.html',
     '/air-gapped-security.html',
+    '/alfred-camera-alternative.html',
     '/baby-monitor.html',
     '/front-door-cam.html',
     '/garage-security.html',
@@ -18,15 +19,16 @@ const PUBLIC_PAGES = [
     '/wildlife-monitor.html',
 ];
 
-test('every public page exposes one main landmark and a skip link', async ({ page }) => {
+test('every public page exposes one main landmark, a skip link, and main navigation', async ({ page }) => {
     for (const path of PUBLIC_PAGES) {
         await page.goto(path);
         await expect(page.locator('main#main-content')).toHaveCount(1);
         await expect(page.locator('.skip-link')).toHaveAttribute('href', '#main-content');
+        await expect(page.locator('nav.site-nav')).toHaveCount(1);
     }
 });
 
-test('homepage reveals content and exposes accessible carousel state', async ({ page }) => {
+test('homepage reveals content and exposes accessible carousel state and arrow navigation', async ({ page }) => {
     await page.goto('/');
 
     const firstReveal = page.locator('.reveal').first();
@@ -43,9 +45,15 @@ test('homepage reveals content and exposes accessible carousel state', async ({ 
     await dots.nth(5).click();
     await expect(dots.nth(5)).toHaveAttribute('aria-current', 'true');
     await expect(dots.first()).not.toHaveAttribute('aria-current', 'true');
+
+    // Jump to final landscape slide (slide 17, index 16) and verify Previous button navigates cleanly back to slide 16 (index 15)
+    await dots.nth(16).click();
+    await expect(dots.nth(16)).toHaveAttribute('aria-current', 'true');
+    await page.locator('.carousel-nav.prev').click();
+    await expect(dots.nth(15)).toHaveAttribute('aria-current', 'true');
 });
 
-test('modal restores focus and body overflow state', async ({ page }) => {
+test('modal restores focus and body overflow state on close button and Escape key', async ({ page }) => {
     await page.goto('/');
 
     const trigger = page.locator('#openFeatureModalBtn');
@@ -70,6 +78,13 @@ test('modal restores focus and body overflow state', async ({ page }) => {
         computedX: getComputedStyle(body).overflowX,
     }));
     expect(restoredOverflow).toEqual(originalOverflow);
+
+    // Also verify Escape key closes modal and restores focus
+    await trigger.click();
+    await expect(modal).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(modal).toBeHidden();
+    await expect(trigger).toBeFocused();
 });
 
 test('paid product messaging is consistent on the pet monitor page', async ({ page }) => {

@@ -16,6 +16,11 @@ EXPECTED_PACKAGE_NAME = "com.ddssolutions.remotecamera"
 EXPECTED_SITE_ORIGIN = "https://dds-solutions.github.io"
 FINGERPRINT_PATTERN = re.compile(r"(?:[0-9A-F]{2}:){31}[0-9A-F]{2}")
 NON_INDEXED_PAGES = {'use-case-template.html', '404.html'}
+MISLEADING_PRICE_PHRASES = (
+    "free pet monitor app",
+    "free baby monitor app",
+    "get started for one very low price",
+)
 
 def log_error(file_path, line_num, message):
     error_str = f"[FAIL] {file_path}:{line_num} - {message}"
@@ -35,7 +40,13 @@ class SiteHTMLParser(HTMLParser):
         self.has_csp = False
         self.csp_content = ""
         self.has_noindex = False
+        self.has_title = False
+        self.in_title = False
+        self.title_text = ""
+        self.has_description = False
+        self.has_canonical = False
         self.main_count = 0
+        self.ids = set()
         self.current_tag = None
         self.current_attrs = {}
         self.in_script = False
@@ -51,6 +62,13 @@ class SiteHTMLParser(HTMLParser):
         attr_dict = {k.lower(): (v if v is not None else "") for k, v in attrs}
         line_num = self.getpos()[0]
 
+        if 'id' in attr_dict and attr_dict['id'].strip():
+            self.ids.add(attr_dict['id'].strip())
+
+        if tag.lower() == 'title':
+            self.has_title = True
+            self.in_title = True
+
         # Check CSP meta tag and robots meta tag
         if tag.lower() == 'meta':
             http_equiv = (attr_dict.get('http-equiv') or '').lower()
@@ -63,6 +81,9 @@ class SiteHTMLParser(HTMLParser):
                 content_val = (attr_dict.get('content') or '').lower()
                 if 'noindex' in content_val:
                     self.has_noindex = True
+            elif meta_name == 'description':
+                if (attr_dict.get('content') or '').strip():
+                    self.has_description = True
 
         if tag.lower() == 'main':
             self.main_count += 1
@@ -88,6 +109,8 @@ class SiteHTMLParser(HTMLParser):
         elif tag.lower() == 'link' and 'href' in attr_dict:
             href_val = attr_dict['href']
             rel_val = (attr_dict.get('rel') or '').lower()
+            if rel_val == 'canonical' and href_val.strip():
+                self.has_canonical = True
             if rel_val in ['stylesheet', 'icon', 'shortcut icon', 'apple-touch-icon', 'preload']:
                 self.assets_to_check.append(('href', href_val, line_num))
             # SRI check for external stylesheets
@@ -110,10 +133,14 @@ class SiteHTMLParser(HTMLParser):
                 self.in_script = False
 
     def handle_data(self, data):
+        if self.in_title:
+            self.title_text += data
         if self.in_script:
             self.script_content += data
 
     def handle_endtag(self, tag):
+        if tag.lower() == 'title':
+            self.in_title = False
         if tag.lower() == 'script' and self.in_script:
             self.in_script = False
             content_stripped = self.script_content.strip()
@@ -180,9 +207,13 @@ def validate_html_file(file_path, root_dir):
         if not asset_path.exists():
             log_error(rel_path, line_num, f"Referenced local asset does not exist: '{target}' (Resolved: {asset_path.name})")
 
-    # 4. Local Link Existence Check
+    # 4. Local Link & Fragment Existence Check
     for href, line_num in parser.links_to_check:
-        if href.startswith('http://') or href.startswith('https://') or href.startswith('mailto:') or href.startswith('tel:') or href.startswith('#'):
+        if href.startswith('#'):
+            if len(href) > 1 and href[1:] not in parser.ids:
+                log_error(rel_path, line_num, f"Broken internal fragment link '{href}' (no matching id='{href[1:]}')")
+            continue
+        if href.startswith('http://') or href.startswith('https://') or href.startswith('mailto:') or href.startswith('tel:'):
             continue
         clean_href = href.split('?')[0].split('#')[0]
         if not clean_href:
@@ -195,10 +226,23 @@ def validate_html_file(file_path, root_dir):
         if not link_path.exists():
             log_error(rel_path, line_num, f"Referenced local link target does not exist: '{href}'")
 
-    # 5. Non-indexed page audit
+    # 5. Non-indexed vs Indexed SEO metadata audit
     if file_path.name in NON_INDEXED_PAGES:
         if not parser.has_noindex:
             log_error(rel_path, 1, f"Non-indexed page '{file_path.name}' is missing '<meta name=\"robots\" content=\"noindex\">'")
+    else:
+        if not parser.has_title or not parser.title_text.strip():
+            log_error(rel_path, 1, "Missing or empty <title> tag on indexed public page")
+        if not parser.has_description:
+            log_error(rel_path, 1, "Missing <meta name=\"description\"> tag on indexed public page")
+        if not parser.has_canonical:
+            log_error(rel_path, 1, "Missing <link rel=\"canonical\"> tag on indexed public page")
+
+    # 6. Misleading pricing phrase audit
+    content_lower = content.lower()
+    for phrase in MISLEADING_PRICE_PHRASES:
+        if phrase in content_lower:
+            log_error(rel_path, 1, f"Misleading pricing phrase found: '{phrase}'")
 
 def validate_assetlinks(root_dir, allow_placeholder_fingerprint=False):
     assetlinks_path = root_dir / '.well-known' / 'assetlinks.json'
@@ -301,9 +345,20 @@ def validate_robots_and_sitemap(root_dir):
         return
 
     locations = []
-    for element in sitemap_root.iter():
-        if element.tag.split('}')[-1] == 'loc' and element.text:
-            locations.append(element.text.strip())
+    for url_elem in sitemap_root:
+        if url_elem.tag.split('}')[-1] != 'url':
+            continue
+        loc_text = None
+        lastmod_text = None
+        for child in url_elem:
+            tag_name = child.tag.split('}')[-1]
+            if tag_name == 'loc' and child.text:
+                loc_text = child.text.strip()
+                locations.append(loc_text)
+            elif tag_name == 'lastmod' and child.text:
+                lastmod_text = child.text.strip()
+        if loc_text and not lastmod_text:
+            log_error("sitemap.xml", 1, f"Missing <lastmod> for sitemap URL: '{loc_text}'")
 
     duplicate_locations = [url for url, count in Counter(locations).items() if count > 1]
     for url in duplicate_locations:

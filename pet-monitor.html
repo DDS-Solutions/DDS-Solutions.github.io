@@ -28,10 +28,64 @@
     <meta name="keywords"
         content="dog camera app, pet monitor app, wifi pet camera, android dog monitor, cat camera">
     <link rel="canonical" href="https://dds-solutions.github.io/pet-monitor.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
-
-
-        <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- Structured Data: SoftwareApplication & FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Pro Wifi Camera Remote",
+                "operatingSystem": "Android 12+",
+                "applicationCategory": "UtilitiesApplication",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "1.99",
+                    "priceCurrency": "USD"
+                },
+                "description": "Check on your dog or cat with a one-time-purchase app. Turn your old phone into a pet camera with no subscription fees.",
+                "url": "https://dds-solutions.github.io/pet-monitor.html",
+                "downloadUrl": "https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera",
+                "author": {
+                    "@type": "Organization",
+                    "name": "DDS Solutions"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Does it have 2-Way Audio?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Currently, we support high-quality one-way audio (listening to your pet). 2-Way audio is a planned future update."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I use a tablet to watch?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes! Tablets make excellent monitors because of the larger screen. You can set it up on your desk while you work."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is there a monthly fee?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Never. Avoid expensive hardware and subscriptions. For a one-time price of just $1.99, you get the ability to install the app to other Android devices as many times as you need."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
 
     <!-- Font Preloads for Performance / LCP -->
     <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
@@ -52,6 +106,20 @@
 <body>
 
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand"><span class="nav-brand-dot" aria-hidden="true"></span>Pro Wifi Camera</a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#use-cases">Use Cases</a>
+                <a href="accessories.html">Accessories</a>
+                <a href="whats-new.html">What's New</a>
+                <a href="alfred-camera-alternative.html">vs Alfred</a>
+                <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
+                    class="nav-cta" target="_blank" rel="noopener noreferrer">Get App ($1.99)</a>
+            </div>
+        </div>
+    </nav>
     <main id="main-content">
     <!-- Breadcrumbs -->
     <div class="container">
@@ -317,6 +385,36 @@
                     <p class="feature-desc">Watch birds at the feeder or wild life in action from a safe distance.</p>
                 </a>
 
+                <!-- RV & Camper Security -->
+                <a href="rv-camper-security.html" class="feature-card">
+                    <div class="icon-glass icon-cyan">
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">RV & Camper Security</h3>
+                    <p class="feature-desc">Off-grid security and pet monitoring for trailers and campers.</p>
+                </a>
+
+                <!-- Laser Cutter & CNC Monitor -->
+                <a href="laser-cnc-monitor.html" class="feature-card">
+                    <div class="icon-glass icon-pink">
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="22" y1="12" x2="18" y2="12"></line>
+                            <line x1="6" y1="12" x2="2" y2="12"></line>
+                            <line x1="12" y1="6" x2="12" y2="2"></line>
+                            <line x1="12" y1="22" x2="12" y2="18"></line>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Laser & CNC Monitor</h3>
+                    <p class="feature-desc">Sub-second low-latency oversight for laser cutters and CNC routers.</p>
+                </a>
+
             </div>
         </div>
     </section>
@@ -328,15 +426,13 @@
         <div class="container">
             <div style="text-align: center; margin-bottom: 20px;">
                 <p>&copy; 2026 DDS Solutions. All rights reserved.</p>
-                <div style="margin-top: 10px;">
-                    <a href="index.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Home</a> |
-                    <a href="whats-new.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">What's New</a> |
-                    <a href="privacy.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
-                    <a href="terms.html" style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">User
-                        Agreement</a>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="whats-new.html">What's New</a>
+                    <a href="accessories.html">Accessories</a>
+                    <a href="alfred-camera-alternative.html">Alfred Camera Alternative</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">User Agreement</a>
                 </div>
             </div>
         </div>

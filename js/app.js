@@ -38,6 +38,7 @@ function openModal(modalId) {
 }
 
 function closeModal(modalId) {
+    const wasAnyOpen = Array.from(document.querySelectorAll('.modal')).some(m => m.style.display === 'flex');
     const modals = modalId ? [document.getElementById(modalId)] : document.querySelectorAll('.modal');
     modals.forEach(modal => {
         if (modal && modal.style.display === 'flex') {
@@ -47,7 +48,7 @@ function closeModal(modalId) {
     });
 
     const anyOpen = Array.from(document.querySelectorAll('.modal')).some(m => m.style.display === 'flex');
-    if (!anyOpen) {
+    if (wasAnyOpen && !anyOpen) {
         if (previousBodyOverflowY) {
             document.body.style.overflowY = previousBodyOverflowY;
         } else {
@@ -181,20 +182,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const dots = dotsContainer ? dotsContainer.querySelectorAll('.carousel-dot') : [];
 
-        // Scroll to specific slide
-        function scrollToSlide(index) {
-            const slide = slides[index];
-            if (slide) {
-                const trackRect = track.getBoundingClientRect();
-                const slideRect = slide.getBoundingClientRect();
-                const scrollPos = track.scrollLeft + slideRect.left - trackRect.left - (trackRect.width - slideRect.width) / 2;
-                track.scrollTo({ left: scrollPos, behavior: 'smooth' });
-            }
-        }
-
-        // Update active dot on scroll with rAF throttle
-        function updateActiveDot() {
-            if (dots.length === 0) return;
+        // Find slide index closest to current viewport center
+        function getClosestSlideIndex() {
             const trackCenter = track.scrollLeft + track.clientWidth / 2;
             let closestIndex = 0;
             let closestDistance = Infinity;
@@ -207,6 +196,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     closestIndex = index;
                 }
             });
+            return closestIndex;
+        }
+
+        // Scroll to specific slide
+        function scrollToSlide(index) {
+            const boundedIndex = Math.max(0, Math.min(slides.length - 1, index));
+            const slide = slides[boundedIndex];
+            if (slide) {
+                const trackRect = track.getBoundingClientRect();
+                const slideRect = slide.getBoundingClientRect();
+                const scrollPos = track.scrollLeft + slideRect.left - trackRect.left - (trackRect.width - slideRect.width) / 2;
+                track.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }
+        }
+
+        // Update active dot on scroll with rAF throttle
+        function updateActiveDot() {
+            if (dots.length === 0) return;
+            const closestIndex = getClosestSlideIndex();
 
             dots.forEach((dot, index) => {
                 const isActive = index === closestIndex;
@@ -229,16 +237,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, { passive: true });
 
-        // Arrow button navigation
+        // Arrow button navigation (index-based to handle variable-width landscape slides)
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
-                track.scrollBy({ left: -300, behavior: 'smooth' });
+                scrollToSlide(getClosestSlideIndex() - 1);
             });
         }
 
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
-                track.scrollBy({ left: 300, behavior: 'smooth' });
+                scrollToSlide(getClosestSlideIndex() + 1);
             });
         }
 
@@ -257,10 +265,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft' && isCarouselFocusedOrHovered()) {
                 e.preventDefault();
-                track.scrollBy({ left: -300, behavior: 'smooth' });
+                scrollToSlide(getClosestSlideIndex() - 1);
             } else if (e.key === 'ArrowRight' && isCarouselFocusedOrHovered()) {
                 e.preventDefault();
-                track.scrollBy({ left: 300, behavior: 'smooth' });
+                scrollToSlide(getClosestSlideIndex() + 1);
             }
         });
     }

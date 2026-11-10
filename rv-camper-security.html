@@ -28,8 +28,64 @@
     <meta name="keywords"
         content="rv security camera, camper camera, off grid pet monitor, travel trailer backup camera, boondocking camera, offline camping monitor">
     <link rel="canonical" href="https://dds-solutions.github.io/rv-camper-security.html">
-
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data: SoftwareApplication & FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Pro Wifi Camera Remote",
+                "operatingSystem": "Android 12+",
+                "applicationCategory": "UtilitiesApplication",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "1.99",
+                    "priceCurrency": "USD"
+                },
+                "description": "Off-grid RV and camper security camera app. Monitor campsite perimeter, hitching, and pets inside your trailer with zero cellular or internet connection needed.",
+                "url": "https://dds-solutions.github.io/rv-camper-security.html",
+                "downloadUrl": "https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera",
+                "author": {
+                    "@type": "Organization",
+                    "name": "DDS Solutions"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Does this work when camping with no cell service?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes! Pro Wifi Camera creates a direct peer-to-peer stream across your local Wi-Fi network. As long as both devices connect to the same Wi-Fi router (even a compact 5V travel router with no WAN internet cable), streaming works flawlessly."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Will this drain my RV house battery?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No. The app includes an ultra-efficient black-screen power-saving mode that turns the screen off while keeping the camera sensor streaming. A standard 10,000mAh portable USB power bank can easily power the camera phone for an entire day of boondocking."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I use this as an RV backup or hitching camera?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes! Many solo travelers mount an old phone on their rear bumper or hitch using a magnetic mount, then view the low-latency video feed on their cab phone while backing up into tight campsites."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
 
     <!-- Font Preloads for Performance / LCP -->
     <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
@@ -50,6 +106,20 @@
 <body>
 
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand"><span class="nav-brand-dot" aria-hidden="true"></span>Pro Wifi Camera</a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#use-cases">Use Cases</a>
+                <a href="accessories.html">Accessories</a>
+                <a href="whats-new.html">What's New</a>
+                <a href="alfred-camera-alternative.html">vs Alfred</a>
+                <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
+                    class="nav-cta" target="_blank" rel="noopener noreferrer">Get App ($1.99)</a>
+            </div>
+        </div>
+    </nav>
     <main id="main-content">
     <!-- Breadcrumbs -->
     <div class="container">
@@ -298,6 +368,46 @@
                     <p class="feature-desc">Real-time workshop monitoring for laser engravers and CNC routers.</p>
                 </a>
 
+                <!-- Baby Monitor -->
+                <a href="baby-monitor.html" class="feature-card">
+                    <div class="icon-glass icon-pink">
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Baby Monitoring</h3>
+                    <p class="feature-desc">Secure, offline monitoring for your nursery.</p>
+                </a>
+
+                <!-- Front Door Cam -->
+                <a href="front-door-cam.html" class="feature-card">
+                    <div class="icon-glass icon-purple">
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Front Door Cam</h3>
+                    <p class="feature-desc">See who is at the door without expensive subscriptions.</p>
+                </a>
+
+                <!-- Home Lab -->
+                <a href="home-lab-monitor.html" class="feature-card">
+                    <div class="icon-glass icon-cyan">
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Home Lab & Inspection</h3>
+                    <p class="feature-desc">Up-close inspection and recording for electronics or experiments.</p>
+                </a>
+
             </div>
         </div>
     </section>
@@ -309,15 +419,13 @@
         <div class="container">
             <div style="text-align: center; margin-bottom: 20px;">
                 <p>&copy; 2026 DDS Solutions. All rights reserved.</p>
-                <div style="margin-top: 10px;">
-                    <a href="index.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Home</a> |
-                    <a href="whats-new.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">What's New</a> |
-                    <a href="privacy.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
-                    <a href="terms.html" style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">User
-                        Agreement</a>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="whats-new.html">What's New</a>
+                    <a href="accessories.html">Accessories</a>
+                    <a href="alfred-camera-alternative.html">Alfred Camera Alternative</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">User Agreement</a>
                 </div>
             </div>
         </div>

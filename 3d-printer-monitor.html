@@ -28,10 +28,64 @@
     <meta name="keywords"
         content="3d printer camera, remote 3d print monitor, octoprint alternative, android 3d print camera, spaghetti detective alternative">
     <link rel="canonical" href="https://dds-solutions.github.io/3d-printer-monitor.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
-
-
-        <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- Structured Data: SoftwareApplication & FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Pro Wifi Camera Remote",
+                "operatingSystem": "Android 12+",
+                "applicationCategory": "UtilitiesApplication",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "1.99",
+                    "priceCurrency": "USD"
+                },
+                "description": "Monitor your 3D prints remotely using an old Android phone. Catch spaghetti failures early and save filament.",
+                "url": "https://dds-solutions.github.io/3d-printer-monitor.html",
+                "downloadUrl": "https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera",
+                "author": {
+                    "@type": "Organization",
+                    "name": "DDS Solutions"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "How do I mount my phone?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "There are thousands of free STL files on Thingiverse/Printables for Phone Tripods or Phone Mounts that you can print yourself!"
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I view on my PC?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, we have a browser viewing mode. You can watch your print progress in a tab while you work on your computer."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is there a monthly fee?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Never. Avoid expensive hardware and subscriptions. For a one-time price of just $1.99, you get the ability to install the app to other Android devices as many times as you need."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
 
     <!-- Font Preloads for Performance / LCP -->
     <link rel="preload" as="font" href="fonts/inter-v13-latin-regular.woff2" type="font/woff2" crossorigin>
@@ -52,6 +106,20 @@
 <body>
 
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand"><span class="nav-brand-dot" aria-hidden="true"></span>Pro Wifi Camera</a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#use-cases">Use Cases</a>
+                <a href="accessories.html">Accessories</a>
+                <a href="whats-new.html">What's New</a>
+                <a href="alfred-camera-alternative.html">vs Alfred</a>
+                <a href="https://play.google.com/store/apps/details?id=com.ddssolutions.remotecamera"
+                    class="nav-cta" target="_blank" rel="noopener noreferrer">Get App ($1.99)</a>
+            </div>
+        </div>
+    </nav>
     <main id="main-content">
     <!-- Breadcrumbs -->
     <div class="container">
@@ -363,15 +431,13 @@
         <div class="container">
             <div style="text-align: center; margin-bottom: 20px;">
                 <p>&copy; 2026 DDS Solutions. All rights reserved.</p>
-                <div style="margin-top: 10px;">
-                    <a href="index.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Home</a> |
-                    <a href="whats-new.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">What's New</a> |
-                    <a href="privacy.html"
-                        style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">Privacy Policy</a> |
-                    <a href="terms.html" style="margin: 0 10px; color: var(--text-muted); text-decoration: none;">User
-                        Agreement</a>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="whats-new.html">What's New</a>
+                    <a href="accessories.html">Accessories</a>
+                    <a href="alfred-camera-alternative.html">Alfred Camera Alternative</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">User Agreement</a>
                 </div>
             </div>
         </div>

@@ -21,6 +21,8 @@ validator-fixture-*/
 node_modules/
 playwright-report/
 test-results/
+.fallow/
+_site/
 
 # OS generated files
 .DS_Store

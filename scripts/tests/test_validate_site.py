@@ -49,8 +49,14 @@ class SiteValidatorTests(unittest.TestCase):
             encoding="utf-8",
         )
 
-    def write_sitemap(self, urls):
-        entries = "".join(f"<url><loc>{url}</loc></url>" for url in urls)
+    def write_sitemap(self, urls, include_lastmod=True):
+        if include_lastmod:
+            entries = "".join(
+                f"<url><loc>{url}</loc><lastmod>2026-10-04</lastmod></url>"
+                for url in urls
+            )
+        else:
+            entries = "".join(f"<url><loc>{url}</loc></url>" for url in urls)
         (self.root / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?>'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
@@ -147,6 +153,65 @@ class SiteValidatorTests(unittest.TestCase):
         validate_site.validate_page_reachability(self.root)
 
         self.assertTrue(any("Orphaned public page detected: 'orphan.html'" in error for error in validate_site.errors))
+
+    def test_sitemap_requires_lastmod_for_every_url(self):
+        (self.root / "index.html").write_text("<!doctype html>", encoding="utf-8")
+        self.write_robots()
+        self.write_sitemap([f"{validate_site.EXPECTED_SITE_ORIGIN}/"], include_lastmod=False)
+
+        validate_site.validate_robots_and_sitemap(self.root)
+
+        self.assertTrue(any("Missing <lastmod>" in error for error in validate_site.errors))
+
+    def test_broken_fragment_link_is_flagged(self):
+        page = self.root / "index.html"
+        page.write_text(
+            '<!doctype html><html><head>'
+            '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\'">'
+            '<title>Test</title>'
+            '<meta name="description" content="Desc">'
+            '<link rel="canonical" href="https://dds-solutions.github.io/">'
+            '</head><body>'
+            '<a href="#nonexistent">Skip</a>'
+            '<main id="main-content"><p>Content</p></main>'
+            '</body></html>',
+            encoding="utf-8",
+        )
+
+        validate_site.validate_html_file(page, self.root)
+
+        self.assertTrue(any("Broken internal fragment link '#nonexistent'" in error for error in validate_site.errors))
+
+    def test_indexed_page_requires_title_description_and_canonical(self):
+        page = self.root / "index.html"
+        page.write_text(
+            '<!doctype html><html><head>'
+            '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\'">'
+            '</head><body><main id="main-content"><p>Content</p></main></body></html>',
+            encoding="utf-8",
+        )
+
+        validate_site.validate_html_file(page, self.root)
+
+        self.assertTrue(any("Missing or empty <title>" in error for error in validate_site.errors))
+        self.assertTrue(any('Missing <meta name="description">' in error for error in validate_site.errors))
+        self.assertTrue(any('Missing <link rel="canonical">' in error for error in validate_site.errors))
+
+    def test_misleading_price_phrase_is_flagged(self):
+        page = self.root / "pet-monitor.html"
+        page.write_text(
+            '<!doctype html><html><head>'
+            '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\'">'
+            '<title>Pet Monitor</title>'
+            '<meta name="description" content="Desc">'
+            '<link rel="canonical" href="https://dds-solutions.github.io/pet-monitor.html">'
+            '</head><body><main id="main-content"><p>Try our free pet monitor app today!</p></main></body></html>',
+            encoding="utf-8",
+        )
+
+        validate_site.validate_html_file(page, self.root)
+
+        self.assertTrue(any("Misleading pricing phrase found" in error for error in validate_site.errors))
 
 
 if __name__ == "__main__":
