@@ -14,6 +14,7 @@ const PUBLIC_PAGES = [
     '/pet-monitor.html',
     '/privacy.html',
     '/rv-camper-security.html',
+    '/solo-work-monitor.html',
     '/terms.html',
     '/whats-new.html',
     '/wildlife-monitor.html',

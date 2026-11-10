@@ -41,7 +41,7 @@ This repository hosts the static site deployed to GitHub Pages at [https://dds-s
 ├── privacy.html                 # Privacy policy
 ├── terms.html                   # User agreement & terms of service
 ├── 404.html                     # Custom 404 error page
-└── [use-case].html              # 10 targeted use-case landing pages (Baby, Pet, 3D Printer, RV, Laser/CNC, etc.)
+└── [use-case].html              # 11 targeted use-case landing pages (Baby, Pet, 3D Printer, RV, Laser/CNC, Solo Work, etc.)
 ```
 
 ---
